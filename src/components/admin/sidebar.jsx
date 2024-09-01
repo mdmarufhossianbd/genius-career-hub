@@ -39,8 +39,7 @@ const Sidebar = () => {
             <p className='border-b mb-2 pl-4'>Main</p>
             {sideberLinks.map((link, index) => (
                 <Link key={index} href={link.href} className={`flex items-center gap-2 border-b bg-blue-300 py-2 pl-4 pr-2 ${pathname === link.href && "bg-blue-400"}`}>{link.icon}{link.name}</Link>                
-            ))}
-            
+            ))}            
         </div>
     );
 };

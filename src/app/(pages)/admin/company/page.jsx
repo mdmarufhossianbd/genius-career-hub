@@ -4,7 +4,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { storage } from "@/config/firebase.config";
 import axios from "axios";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -15,7 +17,8 @@ const Company = () => {
     const [website, setWebsite] = useState()
     const [keyword, setKeyword] = useState();
     const [isLoading, setLoading] = useState(false);
-    const [companyLogo, setCompanyLogo] = useState();    
+    const [companyLogo, setCompanyLogo] = useState();
+    
 
     const handleSaveCompany = async () => {
         setLoading(true)
@@ -25,26 +28,43 @@ const Company = () => {
         }
         const formData = new FormData();
         formData.append('companyLogo', companyLogo);
-        try {
-            const res = await axios.post('/api/v1/company-logo-upload', formData)
-            const logoURL = res.data.imageURL
-            if(res.data.success){
-                const companyInfo = {
-                    name : companyName,
-                    description : companyDescription,
-                    address : companyAddress,
-                    website,
-                    logo : logoURL
-                }
-                const res = await axios.post('/api/v1/company', {companyInfo})
+        const fileName = Date.now()+'.jpg'
+        const storageRef = ref(storage, 'genius-career-hub/'+fileName)
+        await uploadBytes(storageRef, companyLogo).then((snapshort) =>{}).then(res => {getDownloadURL(storageRef).then(async(downloadURL) => {
+            const companyInfo = {
+                name : companyName,
+                description : companyDescription,
+                address : companyAddress,
+                website,
+                logo : downloadURL
+            };
+        const res = await axios.post('/api/v1/company', {companyInfo})
                 if(res.data.success){
                     toast.success(res.data.message)
                     handleReset()         
                 }
-            }            
-        } catch (error) {
-            console.log(error);
-        }        
+         })})
+        
+        // try {
+        //     const res = await axios.post('/api/v1/company-logo-upload', formData)
+        //     const logoURL = res.data.imageURL
+        //     if(res.data.success){
+        //         const companyInfo = {
+        //             name : companyName,
+        //             description : companyDescription,
+        //             address : companyAddress,
+        //             website,
+        //             logo
+        //         }
+        //         const res = await axios.post('/api/v1/company', {companyInfo})
+        //         if(res.data.success){
+        //             toast.success(res.data.message)
+        //             handleReset()         
+        //         }
+        //     }            
+        // } catch (error) {
+        //     console.log(error);
+        // }        
         setLoading(false)
     }
 

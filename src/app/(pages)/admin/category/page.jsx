@@ -1,15 +1,15 @@
 "use client"
+import AllCategories from "@/components/admin/allCategories";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const Category = () => {
     const [keyword, setKeyword] = useState();
-    const [categoryName, setCategoryName] = useState();
-    const [categories, setCategories] = useState([]);
+    const [categoryName, setCategoryName] = useState();    
     const [isLoading, setLoading] = useState(false);
 
     const handleSaveCategory = async () => {
@@ -28,14 +28,6 @@ const Category = () => {
         }
     }
 
-    useEffect(() => {
-        const getAllCategories = async () => {
-            await axios.get('/api/v1/category')
-                .then(res => setCategories(res.data?.result))
-        }
-        getAllCategories()
-    }, [isLoading])
-
     return (
         <div className="px-5">
             <h2 className="text-5xl font-semibold text-center my-10">Category </h2>
@@ -43,8 +35,8 @@ const Category = () => {
                 {/* add category */}
                 <div>
                     <AlertDialog>
-                        <AlertDialogTrigger>
-                            {isLoading ? <Button className="spin-in-180">Loading</Button> : <Button>Add Category</Button>}
+                        <AlertDialogTrigger className="bg-blue-400 px-5 py-2 rounded-md hover:bg-blue-500 hover:text-white duration-300">
+                            {isLoading ? "Loading" : "Add Category"}
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                             <AlertDialogHeader>
@@ -74,13 +66,7 @@ const Category = () => {
                 </div>
             </div>
             {/* show all category */}
-            <div>
-                <div>
-                    {categories.map(category => <div key={category._id}>
-                        <h2>{category.categoryName}</h2>
-                    </div>)}
-                </div>
-            </div>
+            <AllCategories isLoading={isLoading} />            
         </div>
     );
 };
