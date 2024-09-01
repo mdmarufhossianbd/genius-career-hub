@@ -19,3 +19,13 @@ export async function POST(request) {
   }
 }
 
+export async function GET () {
+    const db = await connectDB();
+    const categoriesCollection = db.collection("categories")
+    try {
+        const result = await categoriesCollection.find().toArray();
+        return NextResponse.json({result}, {status : 200})
+    } catch (error) {
+        return NextResponse.json({ message: 'Error receiving data', error: error.message }, { status: 500 });
+    }
+}
