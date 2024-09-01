@@ -1,4 +1,5 @@
 "use client"
+import AllCompanies from "@/components/admin/allCompanies";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,7 +41,6 @@ const Company = () => {
                     toast.success(res.data.message)
                     handleReset()         
                 }
-                toast.error(res.data.message)
             }            
         } catch (error) {
             console.log(error);
@@ -91,11 +91,15 @@ const Company = () => {
                     
                 </AlertDialog>
                 <div className="flex items-center">
-                    <input type="text" onChange={(e) => setKeyword(e.target.value)} placeholder="Search company" className="focus:outline-none border-t border-l border-b rounded-l-full pl-4 py-1" />
+                    <input type="text" onChange={(e) => setKeyword(e.target.value)} placeholder="Enter company name" className="focus:outline-none border-t border-l border-b rounded-l-full pl-4 py-1" />
                     <Button disabled={!keyword} className="rounded-r-full border-t border-r bg-blue-300 text-black hover:bg-blue-400 hover:text-white duration-150 border-b px-5">Search</Button>
                 </div>
             </div>
-            
+            {/* all companies */}
+            <hr className="my-5" />
+            <div>
+                <AllCompanies isLoading={isLoading} />
+            </div>
             <Toaster
                 position="top-right"
                 reverseOrder={false}
