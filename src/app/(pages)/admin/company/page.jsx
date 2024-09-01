@@ -16,8 +16,6 @@ const Company = () => {
     const [isLoading, setLoading] = useState(false);
     const [companyLogo, setCompanyLogo] = useState();    
 
-    // console.log(companyLogo);
-
     const handleSaveCompany = async () => {
         setLoading(true)
         if (!companyLogo) {
@@ -28,8 +26,6 @@ const Company = () => {
         formData.append('companyLogo', companyLogo);
         try {
             const res = await axios.post('/api/v1/company-logo-upload', formData)
-            console.log(res.data);
-            
             const logoURL = res.data.imageURL
             if(res.data.success){
                 const companyInfo = {
@@ -39,16 +35,16 @@ const Company = () => {
                     website,
                     logo : logoURL
                 }
-                console.log(companyInfo);
-
-                handleReset()         
-            }
-            
-            // toast.success(res.data.message)
+                const res = await axios.post('/api/v1/company', {companyInfo})
+                if(res.data.success){
+                    toast.success(res.data.message)
+                    handleReset()         
+                }
+                toast.error(res.data.message)
+            }            
         } catch (error) {
             console.log(error);
-        }
-        
+        }        
         setLoading(false)
     }
 
@@ -68,7 +64,7 @@ const Company = () => {
             {/* add company*/}
             <div className="flex justify-between">
                 <AlertDialog>
-                    <AlertDialogTrigger className="bg-blue-400 hover:bg-blue-500 px-5 py-2 rounded-md duration-200 hover:text-white">
+                    <AlertDialogTrigger className="bg-blue-400 text-white hover:bg-blue-500 px-5 py-2 rounded-md duration-200 hover:text-white">
                         {isLoading ? "Loading" : "Add Company"}
                     </AlertDialogTrigger>
                     
