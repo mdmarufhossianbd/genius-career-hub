@@ -1,14 +1,22 @@
 "use client"
+import CustomLoading from "@/components/shared/customLoading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { AuthContext } from "@/service/authProvider";
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
 import axios from "axios";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
     const [seePassword, setSeePassword] = useState(false)
     const [email, setEmail] = useState();
     const [password, setPassword] =useState();
+    const {setUser} = useContext(AuthContext);
+    const router = useRouter();
+    const [isLoading, setLoading] = useState(false)
+
 
     const handleSeePassword = () => {
         if(seePassword){
@@ -19,14 +27,26 @@ const Login = () => {
     }
 
     const handleLogin = async() => {
+        setLoading(true)
         const loginInfo = {
             email, password
-        }
-        console.log('loginInfo =>',loginInfo);
+        }        
         try {
             await axios.post('/api/v1/login', {loginInfo})
-            .then(res => {
-                console.log(res.data);
+            .then(res => {                
+                if(!res.data.success)
+                    {
+                        toast.error(res.data.message)
+                        setLoading(false)
+                    }
+                else{
+                const userData = res.data?.user                
+                localStorage.setItem('userData', JSON.stringify(userData))
+                setUser(userData)
+                toast.success(res.data.message);
+                setLoading(false)
+                router.push('/admin')
+            }
             })
         } catch (error) {
             setPassword()
@@ -47,6 +67,10 @@ const Login = () => {
                 </div>
                 <Button disabled={!email || !password} onClick={handleLogin}>Login</Button>
             </div>
+            <Toaster
+             position="top-right"
+             reverseOrder={false} />
+            <CustomLoading isLoading={isLoading}/>
         </div>
     );  
 };

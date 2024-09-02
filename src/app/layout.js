@@ -1,6 +1,6 @@
 import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
-import AuthProvider from "@/service/AuthProvider";
+import AuthProvider from "@/service/authProvider";
 import { Inter } from "next/font/google";
 import "./globals.css";
 

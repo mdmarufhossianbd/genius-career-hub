@@ -7,7 +7,6 @@ export const POST = async(request) => {
     const db = await connectDB();
     const data = await request.json();
     const loginInfo = data.loginInfo;
-    // console.log('loginInfo=>', loginInfo);
     try {
         const userCollection = db.collection('users');
         const existingUser = await userCollection.findOne({email : loginInfo.email})
@@ -23,7 +22,7 @@ export const POST = async(request) => {
         const tokenData = {
             id : existingUser._id,
             userName: existingUser.userName,
-            email: existingUser.email            
+            email: existingUser.email
         }
         
         const token =  jwt.sign(tokenData, process.env.NEXT_PUBLIC_JWT_SECRECT_KEY, {expiresIn : '24h'})
@@ -33,7 +32,7 @@ export const POST = async(request) => {
             secure : true,
             httpOnly : true,
             path : '/',
-            sameSite : "Strict"
+            sameSite : "Strict",            
         })
         return NextResponse.json({message : "Login successfully", user: existingUser, status : 200, success : true})
     } catch (error) {
