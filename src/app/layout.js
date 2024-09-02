@@ -1,5 +1,6 @@
 import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
+import AuthProvider from "@/service/AuthProvider";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -13,11 +14,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      
       <body className={inter.className}>
-        <Header />
-        {children}
-        <Footer />
-        </body>
+        <AuthProvider>
+          <Header />
+            {children}
+          <Footer />
+        </AuthProvider>
+      </body>        
     </html>
   );
 }
