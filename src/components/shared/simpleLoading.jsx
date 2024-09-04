@@ -1,18 +1,18 @@
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import Image from "next/image";
-import LoadImg from '../../../public/assets/loading.gif';
-const CustomLoading = ({isLoading}) => {
+import saveLoading from '../../../public/assets/save_loading.gif';
+const SimpleLoading = ({loading}) => {
     return (
         <>
-            <AlertDialog open={isLoading}>
+            <AlertDialog open={loading}>
                 <AlertDialogTrigger></AlertDialogTrigger>
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle></AlertDialogTitle>
                         <AlertDialogDescription>
-                            <div className="flex items-center justify-center py-10">
-                                <Image src={LoadImg} alt="loading" width={100} height={100} />
-                                <p>Please wait .... data is loading</p>
+                            <div className="flex flex-col items-center justify-center py-10">
+                                <Image src={saveLoading} alt="loading" width={100} height={100} />
+                                <p>Please wait .... job is saveing</p>
                             </div>
                         </AlertDialogDescription>
                     </AlertDialogHeader>                    
@@ -22,4 +22,4 @@ const CustomLoading = ({isLoading}) => {
     );
 };
 
-export default CustomLoading;
+export default SimpleLoading;

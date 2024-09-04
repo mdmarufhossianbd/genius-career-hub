@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.ck-content {
+  font-family: 'Lato';
+  line-height: 1.6;
+  word-break: break-word;
+  min-height: 500px;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
