@@ -4,11 +4,41 @@ import CustomLoading from "@/components/shared/customLoading";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import axios from "axios";
 import Link from "next/link";
+import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
+
 
 const AllJobs = () => {
-    const [jobs, isLoading] = useJobs()
-    // console.log(jobs);
+    const [jobs, isLoading] = useJobs();
+    const [edit, setEdit] = useState(true)
+    // todo : need to use transtack query 
+
+    const handleDelete = async (_id) => {
+        try {
+            await axios.delete('/api/v1/jobs', { data: { _id } })
+                .then(res => {
+                    if (res.data.success) {
+                        toast.success(res.data.message)
+                    } else {
+                        toast.error("Failed to delete")
+                    }
+                })
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    const handleEdit = () => {
+        if (edit) {
+            setEdit(true)
+        }
+        // else{
+        //     setEdit(false)
+        // }
+    }
+
     return (
         <div className="p-4">
             <h2 className="text-4xl font-bold text-center my-10">All Jobs</h2>
@@ -22,7 +52,7 @@ const AllJobs = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="w-20">SL No</TableHead>
+                                    <TableHead className="w-14">SL No</TableHead>
                                     <TableHead>Title</TableHead>
                                     <TableHead>Slug</TableHead>
                                     <TableHead>Category</TableHead>
@@ -30,6 +60,7 @@ const AllJobs = () => {
                                     <TableHead>Type</TableHead>
                                     <TableHead>location</TableHead>
                                     <TableHead>Publish Status</TableHead>
+                                    <TableHead>Action</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -50,11 +81,14 @@ const AllJobs = () => {
                                                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                                     <DropdownMenuSeparator />
                                                     <DropdownMenuItem className='hover:cursor-pointer'>
-                                                        <Link href={`/jobs/${job.slug}`} target="_blank">View</Link>
+                                                        <Link className="w-full" href={`/jobs/${job.slug}`} target="_blank">View</Link>
                                                     </DropdownMenuItem>
-                                                    <DropdownMenuItem className='hover:cursor-pointer'>Edit</DropdownMenuItem>
+                                                    <DropdownMenuItem className='hover:cursor-pointer' >
+                                                    <Link className="w-full" href={`/admin/edit/${job.slug}`} target="_blank">Edit</Link>
+                                                    </DropdownMenuItem>
                                                     <DropdownMenuItem className='hover:cursor-pointer'>Draft</DropdownMenuItem>
-                                                    <DropdownMenuItem className='hover:cursor-pointer'>Delete</DropdownMenuItem>
+                                                    <DropdownMenuItem onClick={() => handleDelete(job._id)} className='hover:cursor-pointer'>Delete
+                                                    </DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
                                         </TableCell>
@@ -70,9 +104,10 @@ const AllJobs = () => {
                     </div>
                 </TabsContent>
             </Tabs>
-
-
             <CustomLoading isLoading={isLoading} />
+            <Toaster
+                position="top-center"
+                reverseOrder={false} />
         </div>
     );
 };

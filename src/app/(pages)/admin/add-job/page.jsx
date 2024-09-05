@@ -81,7 +81,7 @@ const AddJobs = () => {
                     <Textarea onChange={(e) => setMeta(e.target.value)} rows={3} placeholder='write meta description' />
                     <AddJobDetails setDescription={setDescription} />
                     
-                    {/* <div dangerouslySetInnerHTML={{__html : description}} /> */}
+                    
                 </div>
                 <div className="bg-slate-100 w-[19%] p-5 rounded-md flex flex-col gap-3">
                     <Addthumbnail setThumbnailUrl={setThumbnailUrl} />
