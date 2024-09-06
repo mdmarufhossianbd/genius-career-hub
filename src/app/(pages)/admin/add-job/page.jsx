@@ -1,6 +1,7 @@
 "use client"
 import AddExperience from "@/components/admin/add-job/addExperience";
 import AddJobDetails from "@/components/admin/add-job/addJobDetails";
+import AddSlug from "@/components/admin/add-job/addSlug";
 import Addthumbnail from "@/components/admin/add-job/addthumbnail";
 import SelectCategory from "@/components/admin/add-job/selectCategory";
 import SelectCompany from "@/components/admin/add-job/selectCompany";
@@ -17,6 +18,9 @@ import toast, { Toaster } from "react-hot-toast";
 
 const AddJobs = () => {   
     const [title, setTitle] = useState();
+    const [suggestSlug, setSuggestSlug] = useState();
+    const [uniqueSlug, setUniqueSlug] = useState();
+    const [slugValid, setSlugValid] = useState(null);
     const [thumbnailUrl, setThumbnailUrl] = useState()
     const [description, setDescription] = useState();
     const [vacancy, setVacancy] = useState()
@@ -30,13 +34,20 @@ const AddJobs = () => {
     const [salary, setSalary] = useState();
     const [loading, setLoading] = useState(false);
     const [meta, setMeta] = useState();
+    const [applyLink, setApplyLink] = useState();
+    
+    const handleTitle = (e) => {
+        setTitle(e.target.value)
+        const generateSlug = title?.split(' ').join('-')
+        setSuggestSlug(generateSlug)
+    }; 
 
     const handlePublishJob = async () => {
-        setLoading(true)
+        // setLoading(true)
         const jobInfo = {
-            title, description, thumbnailUrl, vacancy, experince, experinceDuration, salary, jobType, jobDeadline, category, company, location, meta, author : "admin"
+            title, description, thumbnailUrl, vacancy, experince, experinceDuration, salary, jobType, jobDeadline, category, company, location, meta, author : "admin", slug : uniqueSlug, applyLink
         }
-        
+        console.log(jobInfo);
         try {
             if(experince === "Yes" && !experinceDuration){
                 setLoading(false)
@@ -59,9 +70,6 @@ const AddJobs = () => {
         }
     }
 
-    const handleTitle = (e) => {
-        setTitle(e.target.value)
-    };    
 
     return (
         <div className="px-5">
@@ -72,16 +80,14 @@ const AddJobs = () => {
             <h2 className="text-4xl font-bold text-center my-10">Add New Job Post</h2>
             <div className="flex gap-5">
                 <div className="w-[80%] space-y-2">
-                    <label>Job Title</label>
+                    <p>Job Title</p>
                     {/* <input type="text" name="" id="" defaultValue={} /> */}
                     <Input onKeyUp={handleTitle} name="title" placeholder="Enter job title" />
-                    {/* todo : slug create using title */}
-                    
+                    {/* todo : slug create using title */}                    
+                    <AddSlug suggestSlug={suggestSlug} setUniqueSlug={setUniqueSlug} slugValid={slugValid} setSlugValid={setSlugValid} />
                     <p className="py-1">Job Meta Description</p>
                     <Textarea onChange={(e) => setMeta(e.target.value)} rows={3} placeholder='write meta description' />
-                    <AddJobDetails setDescription={setDescription} />
-                    
-                    
+                    <AddJobDetails setDescription={setDescription} />                    
                 </div>
                 <div className="bg-slate-100 w-[19%] p-5 rounded-md flex flex-col gap-3">
                     <Addthumbnail setThumbnailUrl={setThumbnailUrl} />
@@ -93,7 +99,8 @@ const AddJobs = () => {
                     <SelectCategory setCategory={setCategory} />
                     <SelectCompany setCompany={setCompany} />
                     <SelectLocation setLocation={setLocation} />
-                    <Button onClick={handlePublishJob} disabled={!title || !description || !thumbnailUrl || !vacancy || !salary || !jobType || !jobDeadline || !category || !company || !location || !meta} className='w-full'>Publish</Button>
+                    <Input className='border border-black' onChange={(e) => setApplyLink(e.target.value)} placeholder='Enter Apply link'/>
+                    <Button onClick={handlePublishJob} disabled={!title || !description || !thumbnailUrl || !vacancy || !salary || !jobType || !jobDeadline || !category || !company || !location || !meta || !slugValid} className='w-full'>Publish</Button>
                     <SimpleLoading loading={loading}/>
                 </div>
             </div>

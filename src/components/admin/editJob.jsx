@@ -9,12 +9,13 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "../ui/button";
 
 const EditJob = ({edit}) => {
     return (
-        <AlertDialog open={edit}>
+        <AlertDialog>
             <AlertDialogTrigger asChild>
-                {/* <Button variant="outline">Show Dialog</Button> */}
+                <Button variant="outline">Show Dialog</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>

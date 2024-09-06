@@ -11,7 +11,7 @@ const AddExperience = ({setExperince, setExperinceDuration}) => {
         setExperinceYes(value)
         setExperince(value)
     }
-    console.log(experinceYes);
+    
     return (
         <div>
             <Select className="" onValueChange={(value) => handleSetExperience(value)}>

@@ -36,30 +36,42 @@ export async function generateMetadata({ params }) {
 }
 
 const JobDetails = async ({ params }) => {
-    const { category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, title, vacancy } = await getJobDetails(params.slug)
+    const { category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, title, vacancy, applyLink, companyInfo, } = await getJobDetails(params.slug)
 
 
     return (
-        <div className="px-10 mt-10 max-w-7xl mx-auto ">
-            <div className='flex gap-5'>
-                <div className="w-[70%]">
+        <div className="px-5 md:px-7 lg:px-10 mt-10 max-w-7xl mx-auto ">
+            <div className='md:flex gap-5'>
+                <div className="md:w-[70%] w-full">
                     <h2 className="text-2xl font-bold mb-5">{title}</h2>
                     <div dangerouslySetInnerHTML={{ __html: description }} />
                 </div>
-                <div className="w-[30%]">
+                <div className="md:w-[30%] w-full my-10 md:my-0">
                     <div className="bg-[#dff9fb] p-4 space-y-5 rounded-md">
                         <Image className="w-auto h-auto rounded" src={thumbnailUrl} alt={title} width={350} height={200} priority
                             unoptimized />
-                        <p className="flex items-center gap-2"> <IconCreditCardFilled /><span className="font-semibold">Salary :</span> {salary}</p>
+                        <p className="flex md:items-start lg:items-center items-center gap-2">
+                            <IconCreditCardFilled /><span className="font-semibold">Salary : {salary}</span>
+                        </p>
                         <p className="flex items-center gap-2"> <IconUserScan stroke={2} /><span className="font-semibold">Vacancy :</span> {vacancy}</p>
                         <p className="flex items-center gap-2"> <IconCertificate stroke={2} /><span className="font-semibold">Experince :</span> {experince} </p>
                         <p>{experinceDuration ? `Experince Duration : ${experinceDuration} ` : null}</p>
-                        <p className="flex items-center gap-2"> <IconCategory stroke={2} /><span className="font-semibold">Category :</span> {category} </p>
-                        <p className="flex items-center gap-2"> <IconBriefcase stroke={2} /><span className="font-semibold">Job Type :</span> {jobType} </p>
-                        <p className="flex items-center gap-2"> <IconBuildings stroke={2} /><span className="font-semibold">Company :</span> {company} </p>
-                        <p className="flex items-center gap-2"> <IconMap2 stroke={2} /><span className="font-semibold">Location :</span> {location} </p>
-                        <p className="flex items-center gap-2"> <IconCalendarTime stroke={2} /><span className="font-semibold">Deadline :</span> {new Date(jobDeadline).toLocaleDateString()} </p>
-                        <Button className='w-full bg-blue-500 hover:bg-blue-600'><Link href={'/'} target='_blank'>Apply Now</Link></Button>
+                        <p className="flex md:items-start lg:items-center items-center gap-2">
+                            <IconCategory stroke={2} /><span className="font-semibold">Category : {category}</span>
+                        </p>
+                        <p className="flex md:items-start lg:items-center items-center gap-2">
+                            <IconBriefcase stroke={2} /><span className="font-semibold">Job Type : {jobType}</span>
+                        </p>
+                        <p className="flex md:items-start lg:items-center items-center gap-2">
+                            <IconBuildings stroke={2} /><span className="font-semibold">Company : {company}</span>
+                        </p>
+                        <p className="flex md:items-start lg:items-center items-center gap-2">
+                            <IconMap2 stroke={2} /><span className="font-semibold">Location : {location}</span>
+                        </p>
+                        <p className="flex md:items-start lg:items-center items-center gap-2">
+                            <IconCalendarTime stroke={2} /><span className="font-semibold">Deadline : {new Date(jobDeadline).toLocaleDateString()}</span>
+                        </p>
+                        <Button className='w-full bg-blue-500 hover:bg-blue-600'><Link className='w-full' href={applyLink ? applyLink : ''} target='_blank'>Apply Now</Link></Button>
                     </div>
 
                     <div className="bg-[#95afc0] rounded-md mt-10 p-4">
@@ -75,8 +87,21 @@ const JobDetails = async ({ params }) => {
 
             {/* company details */}
             <div className='p-5 rounded-md bg-[#dff9fb] mt-10'>
-                <h3 className='font-bold text-2xl'>Company Details :</h3>
+                <h3 className='font-bold text-2xl'>Company Details</h3>
+                <div className='flex flex-col md:flex-row-reverse'>
+                    <div className={`${companyInfo ? 'flex items-center justify-center md:w-1/4 w-full my-5 md:my-0' : 'hidden'}`}>
+                        <Image className='w-auto h-auto' src={companyInfo && companyInfo?.logo} width={300} height={300} alt={companyInfo ? companyInfo?.name : null} priority unoptimized />
+                    </div>
+                    <div className='md:w-3/4 w-full space-y-3'>
+                        <h2>{`Company name : ${companyInfo ? companyInfo?.name : ''}`}</h2>
+                        <p className='pb-5 text-justify'>{`Company Details : ${companyInfo ? companyInfo?.description : ''}`}</p>
+                        <Link href={companyInfo ? companyInfo?.website : ''} target='_blank'>{companyInfo ? `Visit :  ${companyInfo?.website}` : ''}</Link>
+                    </div>
+
+                </div>
             </div>
+
+
             {/* relative jobs by category  */}
             <div className='p-5 rounded-md bg-[#dff9fb] mt-10'>
                 <h3 className='font-bold text-2xl'>You can see also it :</h3>
