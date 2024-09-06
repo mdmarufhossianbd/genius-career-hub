@@ -5,11 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import subscribeImage from '../../../../../public/assets/youtube-subscribe.png';
 
-const getJobDetails = async (slug) => {
-    const res = await axios.get(`http://localhost:3000/api/v1/jobs/${slug}`)
-    const data = await res.data
-    return data.result
-}
+const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
+    const getJobDetails = async (slug) => {
+        const res = await axios.get(`${baseUrl}/api/v1/jobs/${slug}`)
+        const data = await res.data
+        return data.result
+    }
 
 export async function generateMetadata({ params }) {
     const { slug } = params
@@ -35,8 +36,8 @@ export async function generateMetadata({ params }) {
     }
 }
 
-const JobDetails = async ({ params }) => {
-    const { category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, title, vacancy, applyLink, companyInfo, } = await getJobDetails(params.slug)
+const JobDetails = async ({ params }) => {    
+    const { category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, title, vacancy, applyLink, companyInfo, } = await getJobDetails(params?.slug)
 
 
     return (

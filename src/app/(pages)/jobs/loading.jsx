@@ -2,7 +2,7 @@
 const loading = () => {
     return (
         <div>
-            Data is loading
+            data is loading
         </div>
     );
 };

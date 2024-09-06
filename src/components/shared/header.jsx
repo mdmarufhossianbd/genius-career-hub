@@ -9,7 +9,7 @@ const Header = () => {
                 <Link href={'/'} className="text-2xl font-semibold">Genius Career Hub</Link>
             </div>
             <div>
-                navlinks 
+            <Link href={'/jobs'}><Button>Jobs</Button></Link>
             </div>
             <div className="flex gap-3">
                 <Button>Post A Job</Button>
