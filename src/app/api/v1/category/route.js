@@ -1,4 +1,5 @@
 import { connectDB } from '@/lib/connectDB';
+import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
@@ -28,4 +29,19 @@ export async function GET () {
     } catch (error) {
         return NextResponse.json({ message: 'Error receiving data', error: error.message }, { status: 500 });
     }
+}
+
+
+export async function DELETE(request) {
+  const db = await connectDB();
+  const categoriesCollection = db.collection('categories')
+  try {
+    const data = await request.json();
+    console.log(data);
+    const query = {_id : new ObjectId(data._id)};
+    const result = await categoriesCollection.deleteOne(query)
+    return NextResponse.json({message : 'Successfully deleted category', result, status : 200, success : true})
+  } catch (error) {
+    return NextResponse.json({message : 'Somthing went wrong', error : error.message}, {status : 500}, {success : false})
+  }
 }

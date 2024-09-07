@@ -28,6 +28,7 @@ export async function POST (request) {
             jobType : data.jobType,
             location : data.location,
             meta : data.meta,
+            publishDate : Date.now(),
             salary : data.salary,
             slug : data.slug,
             thumbnailUrl: data.thumbnailUrl,

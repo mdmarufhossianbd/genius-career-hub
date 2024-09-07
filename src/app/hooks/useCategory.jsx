@@ -5,20 +5,22 @@ import { useEffect, useState } from "react";
 const useCategories = () => {
     const [categories, setCategories] = useState([]);
     const [isLoading, setLoading] = useState(false)
+    const [deleted, setDeleted] = useState(false)
 
-    useEffect(() => {
+    const getCategories = async () => {
         setLoading(true)
-        const getCategories = async () => {
-            await axios.get('/api/v1/category')
-            .then(res => {
-                setCategories(res.data?.result)
-                setLoading(false)
-            })
-        }
+        await axios.get('/api/v1/category')
+        .then(res => {
+            setCategories(res.data?.result)
+            setLoading(false)
+        })
+    }
+
+    useEffect(() => { 
         getCategories()
     }, [])
     
-    return ([categories, isLoading]);
+    return ([categories, isLoading, getCategories]);
 };
 
 export default useCategories;

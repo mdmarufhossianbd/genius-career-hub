@@ -38,12 +38,13 @@ const AddJobs = () => {
     
     const handleTitle = (e) => {
         setTitle(e.target.value)
-        const generateSlug = title?.split(' ').join('-')
+        const lowerCaseTitle = title.toLowerCase()
+        const generateSlug = lowerCaseTitle?.split(' ').join('-')
         setSuggestSlug(generateSlug)
     }; 
 
     const handlePublishJob = async () => {
-        // setLoading(true)
+        setLoading(true)
         const jobInfo = {
             title, description, thumbnailUrl, vacancy, experince, experinceDuration, salary, jobType, jobDeadline, category, company, location, meta, author : "admin", slug : uniqueSlug, applyLink
         }
