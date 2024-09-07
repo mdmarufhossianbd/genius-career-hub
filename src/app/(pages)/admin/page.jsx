@@ -1,12 +1,12 @@
 "use client"
-import { AuthContext } from "@/service/authProvider";
-import { useContext } from "react";
+import { useSession } from "next-auth/react";
 
 const Admin = () => {
-    const {user} = useContext(AuthContext);
+    const sessionData = useSession();
+    
     return (
         <div>
-            admin dashboard {user?.name}
+            admin dashboard {sessionData?.data?.user?.name}
         </div>
     );
 };

@@ -1,8 +1,9 @@
+"use client"
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const useJobs = () => {
-    const [jobs, setJobs] = useState();
+    const [jobs, setJobs] = useState([]);
     const [isLoading, setLoading] = useState(false);
 
     useEffect(() => {

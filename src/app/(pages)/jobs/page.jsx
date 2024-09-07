@@ -1,4 +1,6 @@
 import { Button } from '@/components/ui/button';
+import { PublishJobs } from '@/utils/fetchJobs';
+
 import Image from 'next/image';
 import Link from 'next/link';
 export const metadata = {
@@ -21,12 +23,8 @@ export const metadata = {
     }
 }
 
-const Jobs = async () => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
-    const res = await fetch(`${baseUrl}/api/v1/jobs`);
-    const data = await res.json()
-    const publishJobs = data?.result?.filter(job => job?.publishStatus === 'published');
-    
+const Jobs = async () => {    
+    const publishJobs = await PublishJobs()
     return (
         <div className='flex'>
             <div className='absolute top-20'>

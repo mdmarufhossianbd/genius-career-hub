@@ -1,16 +1,16 @@
 "use client"
-import { AuthContext } from '@/service/authProvider';
 import { IconBriefcaseFilled, IconCategoryFilled, IconHomeFilled, IconSquareRoundedPlusFilled } from '@tabler/icons-react';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useContext } from 'react';
 import { Button } from '../ui/button';
 
 
-const Sidebar = () => {
-    const {logOut} = useContext(AuthContext);
+const Sidebar = () => {    
     const pathname = usePathname()
-
+    const handleLogout = () => {
+        signOut()
+    }
     const sideberLinks = [
         
         {
@@ -34,11 +34,12 @@ const Sidebar = () => {
             icon: <IconHomeFilled />
         },
     ]
+
     return (
         <div className="border-r h-[calc(100%-100px)]">
-            <div className='h-32 flex items-center justify-center'>
+            <div className='h-32 flex items-center justify-center flex-col'>
                 <p>Main Logo</p>
-                <Button onClick={logOut}>Logout</Button>
+                <Button onClick={handleLogout}>Logout</Button>
             </div>
             <p className='border-b mb-2 pl-4'>Main</p>
             {sideberLinks.map((link, index) => (

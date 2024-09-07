@@ -1,20 +1,18 @@
 "use client"
-import CustomLoading from "@/components/shared/customLoading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { AuthContext } from "@/service/authProvider";
-import { IconEye, IconEyeOff } from '@tabler/icons-react';
-import axios from "axios";
+import { IconEye, IconEyeOff, IconReload } from '@tabler/icons-react';
+import { signIn } from 'next-auth/react';
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
     const [seePassword, setSeePassword] = useState(false)
     const [email, setEmail] = useState();
     const [password, setPassword] =useState();
-    const {setUser} = useContext(AuthContext);
-    const router = useRouter();
+    const router = useRouter()
+
     const [isLoading, setLoading] = useState(false)
 
 
@@ -26,32 +24,19 @@ const Login = () => {
         }
     }
 
-    const handleLogin = async() => {
+    const handleLogin2 = async() => {
         setLoading(true)
-        const loginInfo = {
-            email, password
-        }        
-        try {
-            await axios.post('/api/v1/login', {loginInfo})
-            .then(res => {                
-                if(!res.data.success)
-                    {
-                        toast.error(res.data.message)
-                        setLoading(false)
-                    }
-                else{
-                const userData = res.data?.user                
-                localStorage.setItem('userData', JSON.stringify(userData))
-                setUser(userData)
-                toast.success(res.data.message);
-                setLoading(false)
-                router.push('/admin')
-            }
-            })
-        } catch (error) {
-            setPassword()
-            setEmail()
-            console.log(error);
+        const response = await signIn('credentials', {
+            email, password, redirect : false
+        })
+        if(response.ok){
+            toast.success('Logged in successfully')
+            setLoading(false)            
+            // Navigate('/admin')
+            router.push('/admin')
+        } else{
+            toast.error('Please check your email or password')
+            setLoading(false)
         }
     }
 
@@ -65,12 +50,11 @@ const Login = () => {
                         {!seePassword ? <IconEye stroke={2} /> : <IconEyeOff stroke={2} />}
                     </button>
                 </div>
-                <Button disabled={!email || !password} onClick={handleLogin}>Login</Button>
+                <Button disabled={!email || !password} onClick={handleLogin2}>{isLoading ? <span className="flex items-center gap-2"><IconReload className="animate-spin" stroke={2} /> loging</span> : 'Login'}</Button>
             </div>
             <Toaster
              position="top-right"
              reverseOrder={false} />
-            <CustomLoading isLoading={isLoading}/>
         </div>
     );  
 };

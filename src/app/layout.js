@@ -13,14 +13,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      
-      <body className={inter.className}>
+    <html lang="en">      
+      <body className={inter.className}>      
         <AuthProvider>
           <Header />
             {children}
-          <Footer />
-        </AuthProvider>
+          <Footer /> 
+        </AuthProvider>   
       </body>        
     </html>
   );

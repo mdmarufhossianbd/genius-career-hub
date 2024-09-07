@@ -12,8 +12,9 @@ const Header = () => {
             <Link href={'/jobs'}><Button>Jobs</Button></Link>
             </div>
             <div className="flex gap-3">
-                <Button>Post A Job</Button>
-                <Link href={'/admin'}><Button>Login</Button></Link>
+                
+                <Link href={'/login'}><Button>Login</Button></Link>
+                <Link href={'/admin'}><Button>Admin</Button></Link>
             </div>
             </div>
             
