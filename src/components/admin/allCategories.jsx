@@ -5,6 +5,7 @@ import { toast, Toaster } from 'sonner';
 import CustomLoading from '../shared/customLoading';
 import { Button } from '../ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
+import EditCategory from './editCategory';
 
 const AllCategories = () => {
     const [categories, isLoading, getCategories] = useCategories()
@@ -15,12 +16,11 @@ const AllCategories = () => {
             .then(res => {
                 if(res.data?.success){                    
                     toast.success(res.data?.message)   
-                    getCategories()                 
-                }                
+                    getCategories()
+                }
             })
         } catch (error) {
             toast.error(res.data?.message)
-            
         }
     }
     return (
@@ -42,7 +42,10 @@ const AllCategories = () => {
                             <TableCell>{index + 1}</TableCell>
                             <TableCell>{category.categoryName}</TableCell>
                             <TableCell>
-                                <Button>Edit</Button>
+                                <EditCategory category={category} getCategories={getCategories} />
+                                
+                            </TableCell>
+                            <TableCell>
                                 <Button onClick={() => handleDelete(category._id)}>Delete</Button>
                             </TableCell>
                         </TableRow>)

@@ -30,14 +30,29 @@ export async function GET () {
         return NextResponse.json({ message: 'Error receiving data', error: error.message }, { status: 500 });
     }
 }
-
+export async function PATCH(request) {
+  const db = await connectDB();
+  const categoriesCollection = db.collection('categories');
+  try {
+    const data = await request.json();
+    const filter = {_id : new ObjectId(data._id)};
+    const oparation = {
+      $set : {
+        categoryName : data.categoryName
+      }
+    }
+    const result = await categoriesCollection.updateOne(filter, oparation)
+    return NextResponse.json({message : 'Update successfully', result, status : 200, success : true})
+  } catch (error) {
+    return NextResponse.json({message : 'something went wrong', status : 500, success : false})
+  }
+}
 
 export async function DELETE(request) {
   const db = await connectDB();
   const categoriesCollection = db.collection('categories')
   try {
     const data = await request.json();
-    console.log(data);
     const query = {_id : new ObjectId(data._id)};
     const result = await categoriesCollection.deleteOne(query)
     return NextResponse.json({message : 'Successfully deleted category', result, status : 200, success : true})

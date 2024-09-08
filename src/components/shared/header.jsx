@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 const Header = () => {
     const pathname = usePathname();
-    const adminPath = pathname === '/admin' || pathname === '/admin/'
+    const adminPath = pathname === '/admin/:path*'
     return (
         <header className={`h-20 border-b border-[#e4e4e8] sticky top-0 drop-shadow-sm flex items-center bg-[#fcfcfc] z-20 ${adminPath && 'hidden'}`}>
             <div className="flex justify-between max-w-7xl mx-auto flex-1">
