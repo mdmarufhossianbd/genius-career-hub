@@ -48,7 +48,7 @@ const AddJobs = () => {
         const jobInfo = {
             title, description, thumbnailUrl, vacancy, experince, experinceDuration, salary, jobType, jobDeadline, category, company, location, meta, author : "admin", slug : uniqueSlug, applyLink
         }
-        console.log(jobInfo);
+        
         try {
             if(experince === "Yes" && !experinceDuration){
                 setLoading(false)

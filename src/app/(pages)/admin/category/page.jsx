@@ -1,4 +1,5 @@
 "use client"
+import useCategories from "@/app/hooks/useCategory";
 import AllCategories from "@/components/admin/allCategories";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
@@ -11,18 +12,21 @@ const Category = () => {
     const [keyword, setKeyword] = useState();
     const [categoryName, setCategoryName] = useState();    
     const [isLoading, setLoading] = useState(false);
-
+    const [getCategories] = useCategories()
     const handleSaveCategory = async () => {
         setLoading(true);
         try {
-            const res = await axios.post('/api/v1/category', { categoryName })
-            if (res.data.status) {
-                toast.success(res.data.message);
-            }
-            else {
-                toast.error(res.data.message)
-            }
-            setLoading(false)
+            await axios.post('/api/v1/category', { categoryName })
+            .then(res => {
+                if (res.data.success) {
+                    toast.success(res.data.message);
+                    getCategories()
+                    setLoading(false)
+                }else {
+                    toast.error(res.data.message)
+                    setLoading(false)
+                }
+            })            
         } catch (error) {
             console.log('data sending error', error);
         }
@@ -36,7 +40,7 @@ const Category = () => {
                 <div>
                     <AlertDialog>
                         <AlertDialogTrigger className="bg-blue-400 px-5 py-2 rounded-md hover:bg-blue-500 hover:text-white duration-300">
-                            {isLoading ? "Loading" : "Add Category"}
+                            {isLoading ? "Adding Category" : "Add Category"}
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                             <AlertDialogHeader>

@@ -10,10 +10,10 @@ export async function POST(request) {
     const categoryName = data?.categoryName;
     const existCategoryName = await categoriesCollection.find({categoryName : categoryName}).toArray();
     if(existCategoryName.length > 0){
-        return NextResponse.json({ message: 'Already added this category.', status : false });       
+        return NextResponse.json({ message: 'Already added this category.', status: 406, success: true });       
     }
-    await categoriesCollection.insertOne(data);
-    return NextResponse.json({ message: 'Category added successfully', status : true });
+    const result = await categoriesCollection.insertOne(data);
+    return NextResponse.json({ message: 'Category added successfully', result, status: 200, success: true });
 
   } catch (error) {
     return NextResponse.json({ message: 'Error receiving data', error: error.message }, { status: 500 });

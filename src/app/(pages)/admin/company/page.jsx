@@ -1,4 +1,5 @@
 "use client"
+
 import AllCompanies from "@/components/admin/allCompanies";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
@@ -17,8 +18,7 @@ const Company = () => {
     const [website, setWebsite] = useState()
     const [keyword, setKeyword] = useState();
     const [isLoading, setLoading] = useState(false);
-    const [companyLogo, setCompanyLogo] = useState();
-    
+    const [companyLogo, setCompanyLogo] = useState();   
 
     const handleSaveCompany = async () => {
         setLoading(true)
@@ -28,58 +28,38 @@ const Company = () => {
         }
         const formData = new FormData();
         formData.append('companyLogo', companyLogo);
-        const fileName = Date.now()+'.jpg'
-        const storageRef = ref(storage, 'genius-career-hub/'+fileName)
-        await uploadBytes(storageRef, companyLogo).then((snapshort) =>{}).then(res => {getDownloadURL(storageRef).then(async(downloadURL) => {
-            const companyInfo = {
-                name : companyName,
-                description : companyDescription,
-                address : companyAddress,
-                website,
-                logo : downloadURL
-            };
-        const res = await axios.post('/api/v1/company', {companyInfo})
-                if(res.data.success){
+        const fileName = Date.now() + '.jpg'
+        const storageRef = ref(storage, 'genius-career-hub/' + fileName)
+        await uploadBytes(storageRef, companyLogo).then((snapshort) => { }).then(res => {
+            getDownloadURL(storageRef).then(async (downloadURL) => {
+                const companyInfo = {
+                    name: companyName,
+                    description: companyDescription,
+                    address: companyAddress,
+                    website,
+                    logo: downloadURL
+                };
+                const res = await axios.post('/api/v1/company', { companyInfo })
+                if (res.data.success) {
                     toast.success(res.data.message)
-                    handleReset()         
+                    
+                    handleReset();
                 }
-         })})
-        
-        // try {
-        //     const res = await axios.post('/api/v1/company-logo-upload', formData)
-        //     const logoURL = res.data.imageURL
-        //     if(res.data.success){
-        //         const companyInfo = {
-        //             name : companyName,
-        //             description : companyDescription,
-        //             address : companyAddress,
-        //             website,
-        //             logo
-        //         }
-        //         const res = await axios.post('/api/v1/company', {companyInfo})
-        //         if(res.data.success){
-        //             toast.success(res.data.message)
-        //             handleReset()         
-        //         }
-        //     }            
-        // } catch (error) {
-        //     console.log(error);
-        // }        
+            })
+        })
         setLoading(false)
     }
 
-    const handleReset = () => {        
-       setCompanyAddress()
-       setCompanyDescription()
-       setCompanyLogo()
-       setCompanyName()
-       setWebsite()
-       console.log("reset func called");
+    const handleReset = () => {
+        setCompanyAddress()
+        setCompanyDescription()
+        setCompanyLogo()
+        setCompanyName()
+        setWebsite()
     }
 
     return (
         <div className="px-5">
-            add compnay name and logo, update, delete compnay name.
             <h2 className="text-4xl font-semibold text-center my-10">Add Company</h2>
             {/* add company*/}
             <div className="flex justify-between">
@@ -87,7 +67,7 @@ const Company = () => {
                     <AlertDialogTrigger className="bg-blue-400 text-white hover:bg-blue-500 px-5 py-2 rounded-md duration-200 hover:text-white">
                         {isLoading ? "Loading" : "Add Company"}
                     </AlertDialogTrigger>
-                    
+
                     <AlertDialogContent>
                         <AlertDialogHeader>
                             <AlertDialogTitle>Add new Company</AlertDialogTitle>
@@ -98,7 +78,7 @@ const Company = () => {
                                     <Input type="url" onChange={(e) => setWebsite(e.target.value)} placeholder="Enter company website" className="text-black" />
                                     <Input onChange={(e) => setCompanyAddress(e.target.value)} placeholder="Enter company address" className=" text-black" />
                                     <Input onChange={(e) => setCompanyLogo(e.target.files[0])} type="file" placeholder="select company logo" />
-                                </form>                               
+                                </form>
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -108,7 +88,7 @@ const Company = () => {
                             </AlertDialogAction>
                         </AlertDialogFooter>
                     </AlertDialogContent>
-                    
+
                 </AlertDialog>
                 <div className="flex items-center">
                     <input type="text" onChange={(e) => setKeyword(e.target.value)} placeholder="Enter company name" className="focus:outline-none border-t border-l border-b rounded-l-full pl-4 py-1" />

@@ -1,23 +1,25 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+'use client'
 
-const useCompanies = () => {
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const useCompany = () => {
     const [companies, setCompanies] = useState([]);
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(false)
 
-    useEffect(()=>{
+    const getAllCompany = async() =>{
         setLoading(true)
-        const getCompanies = async() =>{
-            await axios.get('/api/v1/company')
-            .then(res => {                
-                setCompanies(res.data?.result)
-                setLoading(false)
-            })
-        }
-        getCompanies()
-    },[])
+        await axios.get('/api/v1/company')
+        .then(res => {
+            setCompanies(res.data?.result)
+            setLoading(false)
+        })
+    }
 
-    return ([companies, isLoading]);
+    useEffect(() => {
+        getAllCompany()
+    },[])
+    return ([companies, isLoading, getAllCompany]);
 };
 
-export default useCompanies;
+export default useCompany;
