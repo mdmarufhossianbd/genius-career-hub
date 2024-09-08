@@ -7,7 +7,7 @@ const SelectCategory = ({setCategory}) => {
     const [categories, isLoading] = useCategories();
     
     return (
-        <div>
+        <>
             <Select className="" onValueChange={(value) => setCategory(value)}>
                 <SelectTrigger className="border border-black">
                     <SelectValue className="text-white" placeholder="Select Category" />
@@ -21,7 +21,7 @@ const SelectCategory = ({setCategory}) => {
                 </SelectContent>
             </Select>
             <CustomLoading isLoading={isLoading}/>
-        </div>
+        </>
     );
 };
 

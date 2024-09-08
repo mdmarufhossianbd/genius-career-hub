@@ -2,7 +2,7 @@
 import { Editor } from '@tinymce/tinymce-react';
 import { useRef } from 'react';
 
-const AddJobDetails = ({setDescription}) => {
+const EditJobDetails = ({description, setDescription}) => {
     const editorRef = useRef(null);
     const apiKey = process.env.NEXT_PUBLIC_TINYMCE_API_KEY
     const content = () => {
@@ -11,14 +11,14 @@ const AddJobDetails = ({setDescription}) => {
         }
     };
     return (
-        <>
+        <div>
             <p className='mb-2'>Job Description</p>
             <Editor
                 
                 onKeyUp={content}
                 apiKey={apiKey}
                 onInit={(evt, editor) => editorRef.current = editor}
-                initialValue="Type or paste your content here!"
+                initialValue={description}
                 init={{
                     height: 500,
                     menubar: false,
@@ -33,8 +33,8 @@ const AddJobDetails = ({setDescription}) => {
                     content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
                 }}
             />
-        </>
+        </div>
     );
 };
 
-export default AddJobDetails;
+export default EditJobDetails;

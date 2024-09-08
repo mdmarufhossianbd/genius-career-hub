@@ -12,7 +12,7 @@ const SelectCompany = ({setCompany}) => {
     const [companies, isLoading] = useCompanies()
     
     return (
-        <div>
+        <>
             <Select className="" onValueChange={(value) => setCompany(value)}>
                 <SelectTrigger className="border border-black">
                     <SelectValue className="text-white" placeholder="Select Company" />
@@ -26,7 +26,7 @@ const SelectCompany = ({setCompany}) => {
                 </SelectContent>
             </Select>
             <CustomLoading isLoading={isLoading}/>
-        </div>
+        </>
     );
 };
 

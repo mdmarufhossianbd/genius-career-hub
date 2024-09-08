@@ -54,7 +54,7 @@ const AddJobs = () => {
                 setLoading(false)
                 return toast.error('Experince Duration need to added')
             } else {
-                await axios.post('/api/v1/add-job', jobInfo)
+                await axios.post('/api/v1/job', jobInfo)
                 .then(res => {
                     if(res.data.success){
                         toast.success(res.data.message)
@@ -81,10 +81,8 @@ const AddJobs = () => {
             <h2 className="text-4xl font-bold text-center my-10">Add New Job Post</h2>
             <div className="flex gap-5">
                 <div className="w-[80%] space-y-2">
-                    <p>Job Title</p>
-                    {/* <input type="text" name="" id="" defaultValue={} /> */}
-                    <Input onKeyUp={handleTitle} name="title" placeholder="Enter job title" />
-                    {/* todo : slug create using title */}                    
+                    <p>Job Title</p>                    
+                    <Input onKeyUp={handleTitle} name="title" placeholder="Enter job title" />   
                     <AddSlug suggestSlug={suggestSlug} setUniqueSlug={setUniqueSlug} slugValid={slugValid} setSlugValid={setSlugValid} />
                     <p className="py-1">Job Meta Description</p>
                     <Textarea onChange={(e) => setMeta(e.target.value)} rows={3} placeholder='write meta description' />

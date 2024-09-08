@@ -8,7 +8,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 
-const SelectJobDeadline = ({jobDeadline, setJobDeadline}) => {    
+const EditDateline = ({newJobDeadline, setJobDeadline}) => {    
 
     return (
         <div>
@@ -18,17 +18,17 @@ const SelectJobDeadline = ({jobDeadline, setJobDeadline}) => {
                         variant={"outline"}
                         className={cn(
                             "w-full border-black justify-start text-left font-normal bg-transparent hover:bg-transparent",
-                            !jobDeadline && "text-muted-foreground"
+                            !newJobDeadline && "text-muted-foreground"
                         )}
                     >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {jobDeadline ? format(jobDeadline, "PPP") : <span>Select Deadline</span>}
+                        {newJobDeadline ? format(newJobDeadline, "PPP") : <span>Select Deadline</span>}
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
                         mode="single"
-                        selected={jobDeadline}
+                        selected={newJobDeadline}
                         onSelect={setJobDeadline}
                         initialFocus
                     />
@@ -38,4 +38,4 @@ const SelectJobDeadline = ({jobDeadline, setJobDeadline}) => {
     );
 };
 
-export default SelectJobDeadline;
+export default EditDateline;

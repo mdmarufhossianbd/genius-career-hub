@@ -52,7 +52,6 @@ export async function PUT(request) {
     const companyCollection = db.collection('companies');
     try {
         const data = await request.json()
-        console.log(data);
         const query = {_id : new ObjectId(data._id)}
         const oparation = {
             $set : {
