@@ -5,7 +5,7 @@ import path from "path";
 export async function POST (request){
   const data = await request.formData();
   const file = data.get('companyLogo')
-  console.log(file);
+  
   if(!file){
     return NextResponse.json({message : "Please select a image"}, {status : 400}, {success : false})
   }

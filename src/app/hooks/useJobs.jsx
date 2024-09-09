@@ -11,7 +11,6 @@ const useJobs = () => {
         const getAllJobs = async() => {
             await axios.get('/api/v1/jobs')
             .then(res => {
-                console.log(res.data);
                 setJobs(res.data.result)
                 setLoading(false)
             })

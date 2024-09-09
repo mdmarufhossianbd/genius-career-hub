@@ -17,7 +17,7 @@ import EditSlug from "./editSlug";
 import EditThumbnail from "./editThumbnailUrl";
 
 const EditJobComponents = ({ job }) => {
-    const {_id, title, slug, category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, vacancy, applyLink, companyInfo, meta, author} = job;
+    const {_id, title, slug, category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, vacancy, applyLink, companyInfo, meta, author, age, eudcation} = job;
 
     const [newtitle, setTitle] = useState(title);
     const [newSlug, setSlug] = useState(slug);
@@ -35,6 +35,8 @@ const EditJobComponents = ({ job }) => {
     const [newLocation, setLocation] = useState(location);
     const [newApplyLink, setApplyLink] = useState(applyLink);
     const [isLoading, setLoading] = useState(false);
+    const [newAge, setAge] = useState(age);
+    const [newEudcation, setEducation] = useState(eudcation)
     
     const handlePublish = async() => {
         setLoading(true)
@@ -56,7 +58,9 @@ const EditJobComponents = ({ job }) => {
             location : newLocation,
             applyLink : newApplyLink,
             author,
-            companyInfo
+            companyInfo,
+            age : newAge,
+            eudcation : newEudcation
         }
         
         try {
@@ -87,8 +91,10 @@ const EditJobComponents = ({ job }) => {
             </div>
             <div className="bg-slate-100 w-[20%] p-5 rounded-md flex flex-col gap-3">
                 <EditThumbnail setThumbnailUrl={setThumbnailUrl} thumbnailUrl={thumbnailUrl} newThumbnailUrl={newThumbnailUrl}/>
-                <Input onChange={(e) => setVacancy(e.target.value)} defaultValue={newVacancy} className="border-black" placeholder="Enter Vacancy" type='number' />
-                <Input onChange={(e) => setSalary(e.target.value)} className="border-black" placeholder="Enter Salary" />  
+                <Input onChange={(e) => setVacancy(e.target.value)} defaultValue={newVacancy} className="border-black" placeholder="Enter Vacancy" />
+                <Input onChange={(e) => setSalary(e.target.value)} defaultValue={salary} className="border-black" placeholder="Enter Salary" />  
+                <Input onChange={(e) => setAge(e.target.value)} defaultValue={age} className="border-black" placeholder="Enter Age" />  
+                <Input onChange={(e) => setEducation(e.target.value)} defaultValue={eudcation} className="border-black" placeholder="Enter Education" />  
                 <EditExperience experince={experince} experinceDuration={experinceDuration} setExperince={setExperince} setExperinceDuration={setExperinceDuration} />
                 <EditDateline setJobDeadline={setJobDeadline} newJobDeadline={newJobDeadline}/>
                 <EditJobType jobType={jobType} setJobType={setJobType} />
@@ -96,7 +102,7 @@ const EditJobComponents = ({ job }) => {
                 <EditCompany setCompany={setCompany} company={company}/>
                 <EditLocation setLocation={setLocation} location={location} />
                 <Input defaultValue={applyLink} className='border border-black' onChange={(e) => setApplyLink(e.target.value)} placeholder='Enter Apply link'/>
-                <Button onClick={handlePublish} disabled={!newtitle || !newSlug}>Published</Button>
+                <Button onClick={handlePublish} disabled={!newtitle || !newSlug}>Update</Button>
             </div>        
         </div>
     );

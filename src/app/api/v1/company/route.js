@@ -1,8 +1,13 @@
+import { checkAdmin } from '@/config/protectAPI';
 import { connectDB } from '@/lib/connectDB';
 import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized) {
+      return isUnauthorized
+    }
     const db = await connectDB();
     const companyCollection = db.collection("companies")
     try {
@@ -35,6 +40,10 @@ export async function GET () {
 }
 
 export async function DELETE(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized) {
+      return isUnauthorized
+    }
     const db = await connectDB();
     const companyCollection = db.collection('companies')
     try {
@@ -48,6 +57,10 @@ export async function DELETE(request) {
 }
 
 export async function PUT(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized) {
+      return isUnauthorized
+    }
     const db = await connectDB();
     const companyCollection = db.collection('companies');
     try {
@@ -64,7 +77,7 @@ export async function PUT(request) {
         }
         const upsert = {upsert : true}
         const result = await companyCollection.updateOne(query, oparation, upsert);
-        console.log(result);
+       
         return NextResponse.json({message : 'Information update successfully', result, status : 200, success : true})
     } catch (error) {
         return NextResponse.json({message : 'something went wrong', status : 500, success : false})

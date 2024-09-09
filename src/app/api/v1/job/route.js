@@ -1,3 +1,4 @@
+import { checkAdmin } from "@/config/protectAPI";
 import {
     connectDB
 } from "@/lib/connectDB";
@@ -9,6 +10,10 @@ import {
 } from "next/server";
 
 export async function POST(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized) {
+      return isUnauthorized
+    }
     const db = await connectDB();
     const jobCollection = db.collection('jobs')
     const companyCollection = db.collection('companies')
@@ -31,10 +36,12 @@ export async function POST(request) {
             publishStatus: "published",
             applyLink: data.applyLink,
             author,
+            age : data.age,
             category: data.category,
             company: data.company,
             companyInfo,
             description: data.description,
+            education : data.education,
             experince: data.experince,
             experinceDuration: data.experinceDuration,
             jobDeadline: data.jobDeadline,
@@ -65,6 +72,10 @@ export async function POST(request) {
 }
 
 export async function PUT(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized) {
+      return isUnauthorized
+    }
     const db = await connectDB();
     const jobCollection = db.collection('jobs')
     const companyCollection = db.collection('companies')
@@ -79,11 +90,13 @@ export async function PUT(request) {
                 publishStatus: "published",
                 applyLink: data.applyLink,
                 author : data.author,
+                age : data.age,
                 category: data.category,
                 company: data.company,
                 companyInfo,
                 description: data.description,
-                experince: data.experince,
+                education : data.education,
+                experince: data.experince,                
                 experinceDuration: data.experinceDuration,
                 jobDeadline: data.jobDeadline,
                 jobType: data.jobType,
@@ -99,7 +112,6 @@ export async function PUT(request) {
         }
         const upsert = {upsert : true}
         const result = await jobCollection.updateOne(query, oparation, upsert)
-        console.log(result);
         return NextResponse.json({message : 'Job update successfully', result, status : 200, success : true})
     } catch (error) {
         return NextResponse.json({
@@ -111,6 +123,10 @@ export async function PUT(request) {
 }
 
 export async function DELETE(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized) {
+      return isUnauthorized
+    }
     const db = await connectDB()
     const jobCollection = db.collection('jobs')
     try {

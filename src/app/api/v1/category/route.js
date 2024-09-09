@@ -1,8 +1,14 @@
+import { checkAdmin } from '@/config/protectAPI';
 import { connectDB } from '@/lib/connectDB';
 import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 
+
 export async function POST(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized) {
+      return isUnauthorized
+    }
     const db = await connectDB();
     const categoriesCollection = db.collection("categories");
   try {
@@ -20,7 +26,7 @@ export async function POST(request) {
   }
 }
 
-export async function GET () {
+export async function GET () {    
     const db = await connectDB();
     const categoriesCollection = db.collection("categories")
     try {
@@ -30,7 +36,12 @@ export async function GET () {
         return NextResponse.json({ message: 'Error receiving data', error: error.message }, { status: 500 });
     }
 }
+
 export async function PATCH(request) {
+  const isUnauthorized = await checkAdmin();
+  if(isUnauthorized) {
+    return isUnauthorized
+  }
   const db = await connectDB();
   const categoriesCollection = db.collection('categories');
   try {
@@ -49,6 +60,10 @@ export async function PATCH(request) {
 }
 
 export async function DELETE(request) {
+  const isUnauthorized = await checkAdmin();
+  if(isUnauthorized) {
+    return isUnauthorized
+  }
   const db = await connectDB();
   const categoriesCollection = db.collection('categories')
   try {

@@ -12,8 +12,7 @@ export async function POST(request) {
             })
         }
         const query = {slug : data.slug}
-        const existingSlug = await jobCollection.findOne(query);
-        console.log(existingSlug);
+        const existingSlug = await jobCollection.findOne(query);        
         if(existingSlug){
             return NextResponse.json({message : 'already used this slug', data : existingSlug, status : 401, success : false})
         }

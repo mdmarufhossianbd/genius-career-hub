@@ -1,3 +1,4 @@
+import { checkAdmin } from "@/config/protectAPI";
 import { connectDB } from "@/lib/connectDB";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
@@ -14,6 +15,10 @@ export async function GET () {
 }
 
 export async function DELETE (request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized) {
+      return isUnauthorized
+    }
     const db = await connectDB();
     const jobCollection = db.collection('jobs');
     try {

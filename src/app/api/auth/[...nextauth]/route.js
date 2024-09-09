@@ -1,13 +1,13 @@
 import { connectDB } from "@/lib/connectDB";
 import bcrypt from "bcrypt";
-import NextAuth from "next-auth";
+import nextAuth from "next-auth";
 
 import CredentialProvider from 'next-auth/providers/credentials';
 
-const handler = NextAuth({
+export const authOptions = {
     session: {
         strategy : 'jwt',
-        maxAge : 30 * 24 * 60 * 60
+        maxAge : 1 * 24 * 60 * 60
     },
     providers: [
         CredentialProvider({
@@ -26,7 +26,6 @@ const handler = NextAuth({
                 if(!currentUser){
                     return
                 }
-
                 const passwordMatched = bcrypt.compareSync(password, currentUser.password);
                 if(!passwordMatched){
                     return
@@ -35,11 +34,25 @@ const handler = NextAuth({
             }
         })
     ],    
-    callbacks: {},
+    callbacks: {
+        async jwt({token, user})  {
+            if(user){
+                token.role = user.userType
+            }
+            return token
+        },
+        async session({session, token}) {
+            if(token){
+                session.user.role = token.role
+            }
+            return session
+        }
+    },
     pages : {
         signIn : '/login'
     }
-})
+}
+const handler = nextAuth(authOptions)
 
 export { handler as GET, handler as POST };
 

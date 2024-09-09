@@ -37,9 +37,8 @@ const EditCompany = ({ company, getAllCompany }) => {
         }
         try {
             await axios.put('/api/v1/company', companyInfo)
-            .then(res => {
-                console.log(res.data);
-                if(res.data?.result?.modifiedCount >= 0){
+            .then(res => {                
+                if(res.data?.result?.modifiedCount > 0){
                     toast.success(res.data?.message)
                     getAllCompany()
                 }

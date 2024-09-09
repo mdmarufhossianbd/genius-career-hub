@@ -24,7 +24,7 @@ const Login = () => {
         }
     }
 
-    const handleLogin2 = async() => {
+    const handleLogin = async() => {
         setLoading(true)
         const response = await signIn('credentials', {
             email, password, redirect : false
@@ -32,7 +32,6 @@ const Login = () => {
         if(response.ok){
             toast.success('Logged in successfully')
             setLoading(false)            
-            // Navigate('/admin')
             router.push('/admin')
         } else{
             toast.error('Please check your email or password')
@@ -50,7 +49,7 @@ const Login = () => {
                         {!seePassword ? <IconEye stroke={2} /> : <IconEyeOff stroke={2} />}
                     </button>
                 </div>
-                <Button disabled={!email || !password} onClick={handleLogin2}>{isLoading ? <span className="flex items-center gap-2"><IconReload className="animate-spin" stroke={2} /> loging</span> : 'Login'}</Button>
+                <Button disabled={!email || !password} onClick={handleLogin}>{isLoading ? <span className="flex items-center gap-2"><IconReload className="animate-spin" stroke={2} /> loging</span> : 'Login'}</Button>
             </div>
             <Toaster
              position="top-right"

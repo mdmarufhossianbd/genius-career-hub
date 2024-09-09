@@ -35,6 +35,8 @@ const AddJobs = () => {
     const [loading, setLoading] = useState(false);
     const [meta, setMeta] = useState();
     const [applyLink, setApplyLink] = useState();
+    const [age, setAge] = useState();
+    const [education, setEducation] = useState();
     
     const handleTitle = (e) => {
         setTitle(e.target.value)
@@ -46,7 +48,7 @@ const AddJobs = () => {
     const handlePublishJob = async () => {
         setLoading(true)
         const jobInfo = {
-            title, description, thumbnailUrl, vacancy, experince, experinceDuration, salary, jobType, jobDeadline, category, company, location, meta, author : "admin", slug : uniqueSlug, applyLink
+            title, description, thumbnailUrl, vacancy, experince, experinceDuration, salary, jobType, jobDeadline, category, company, location, meta, author : "admin", slug : uniqueSlug, applyLink, age, education
         }
         
         try {
@@ -90,8 +92,10 @@ const AddJobs = () => {
                 </div>
                 <div className="bg-slate-100 w-[19%] p-5 rounded-md flex flex-col gap-3">
                     <Addthumbnail setThumbnailUrl={setThumbnailUrl} />
-                    <Input onChange={(e) => setVacancy(e.target.value)} className="border-black" placeholder="Enter Vacancy" type='number' />
-                    <Input onChange={(e) => setSalary(e.target.value)} className="border-black" placeholder="Enter Salary" />                    
+                    <Input onChange={(e) => setVacancy(e.target.value)} className="border-black" placeholder="Enter Vacancy" type='text' />
+                    <Input onChange={(e) => setSalary(e.target.value)} className="border-black" placeholder="Enter Salary" />     
+                    <Input onChange={(e) => setAge(e.target.value)} className="border-black" placeholder='Enter age' /> 
+                    <Input onChange={(e) => setEducation(e.target.value)} className="border-black" placeholder='Enter education' /> 
                     <AddExperience setExperince={setExperince} setExperinceDuration={setExperinceDuration}/>
                     <SelectJobDeadline setJobDeadline={setJobDeadline} jobDeadline={jobDeadline} />
                     <SelectJobType setJobType={setJobType} />
@@ -99,7 +103,7 @@ const AddJobs = () => {
                     <SelectCompany setCompany={setCompany} />
                     <SelectLocation setLocation={setLocation} />
                     <Input className='border border-black' onChange={(e) => setApplyLink(e.target.value)} placeholder='Enter Apply link'/>
-                    <Button onClick={handlePublishJob} disabled={!title || !description || !thumbnailUrl || !vacancy || !salary || !jobType || !jobDeadline || !category || !company || !location || !meta || !slugValid} className='w-full'>Publish</Button>
+                    <Button onClick={handlePublishJob} disabled={!title || !description || !thumbnailUrl || !vacancy || !salary || !jobType || !jobDeadline || !category || !company || !location || !meta || !slugValid || !education || !age} className='w-full'>Publish</Button>
                     <SimpleLoading loading={loading}/>
                 </div>
             </div>
