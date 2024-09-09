@@ -1,4 +1,3 @@
-
 import DraftJobsTableData from "@/components/admin/all-jobs/draftJobsTableData";
 import PublishJobsTableData from "@/components/admin/all-jobs/publishJobsTableData";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

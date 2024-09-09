@@ -3,12 +3,16 @@ import { IconBriefcase, IconBuildings, IconCalendarTime, IconCategory, IconCerti
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from 'next/navigation';
 import subscribeImage from '../../../../../public/assets/youtube-subscribe.png';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
     const getJobDetails = async (slug) => {
         const res = await axios.get(`${baseUrl}/api/v1/jobs/${slug}`)
-        const data = await res.data
+        const data = await res.data        
+        if(data?.status === 404){
+            return null
+        }
         return data.result
     }
 
@@ -36,9 +40,12 @@ export async function generateMetadata({ params }) {
     }
 }
 
-const JobDetails = async ({ params }) => {    
-    const { category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, title, vacancy, applyLink, companyInfo, } = await getJobDetails(params?.slug)
-
+const JobDetails = async ({ params }) => {
+    const job = await getJobDetails(params?.slug)
+    if(!job){
+        notFound()
+    }
+    const {category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, title, vacancy, applyLink, companyInfo} = job
 
     return (
         <div className="px-5 md:px-7 lg:px-10 mt-10 max-w-7xl mx-auto ">
@@ -94,7 +101,7 @@ const JobDetails = async ({ params }) => {
                         <Image className='w-auto h-auto' src={companyInfo && companyInfo?.logo} width={300} height={300} alt={companyInfo ? companyInfo?.name : null} priority unoptimized />
                     </div>
                     <div className='md:w-3/4 w-full space-y-3'>
-                        <h2>{`Company name : ${companyInfo ? companyInfo?.name : ''}`}</h2>
+                        <h2 className='mt-5'>{`Company name : ${companyInfo ? companyInfo?.name : ''}`}</h2>
                         <p className='pb-5 text-justify'>{`Company Details : ${companyInfo ? companyInfo?.description : ''}`}</p>
                         <Link href={companyInfo ? companyInfo?.website : ''} target='_blank'>{companyInfo ? `Visit :  ${companyInfo?.website}` : ''}</Link>
                     </div>

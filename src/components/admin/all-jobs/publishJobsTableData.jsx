@@ -1,8 +1,27 @@
+'use client'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast, Toaster } from "sonner";
 
-const PublishJobsTableData = ({ publishJobs }) => {
+const PublishJobsTableData =  ({ publishJobs }) => {
+      const router = useRouter()
+
+    const handleDelte = async(_id) => {
+        try {
+            await axios.delete('/api/v1/job', {data : {_id}})
+            .then(res => {
+                if(res.data?.result?.deletedCount > 0){                    
+                    toast.success(res.data.message)
+                    router.push('/admin/all-jobs')
+                }
+            })
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
     return (
         <div className="rounded-md border">
@@ -43,9 +62,10 @@ const PublishJobsTableData = ({ publishJobs }) => {
                                         <DropdownMenuItem className='hover:cursor-pointer' >
                                             <Link className="w-full" href={`/admin/edit/${job.slug}`} target="_blank">Edit</Link>
                                         </DropdownMenuItem>
-                                        <DropdownMenuItem className='hover:cursor-pointer'>Draft</DropdownMenuItem>
-                                        {/* <DropdownMenuItem onClick={() => handleDelete(job._id)} className='hover:cursor-pointer'>Delete
-                    </DropdownMenuItem> */}
+                                        <DropdownMenuItem className='hover:cursor-pointer'>Make Draft</DropdownMenuItem>
+                                        <DropdownMenuItem >
+                                            <div className="hover:cursor-pointer w-full" onClick={() => handleDelte(job._id)}>Delete</div>
+                                        </DropdownMenuItem>
                                     </DropdownMenuContent>
                                 </DropdownMenu>
                             </TableCell>
@@ -54,6 +74,7 @@ const PublishJobsTableData = ({ publishJobs }) => {
 
                 </TableBody>
             </Table>
+            <Toaster position="top-right" richColors />
         </div>
     );
 };

@@ -109,3 +109,25 @@ export async function PUT(request) {
         })
     }
 }
+
+export async function DELETE(request) {
+    const db = await connectDB()
+    const jobCollection = db.collection('jobs')
+    try {
+        const data = await request.json();
+        const query = {_id : new ObjectId(data._id)}
+        const result = await jobCollection.deleteOne(query);
+        return NextResponse.json({
+            message : 'Job deleted successfully',
+            status : 200,
+            result,
+            success : true
+        })
+    } catch (error) {
+        return NextResponse.json({
+            message: 'somthing went wrong',
+            status: 500,
+            success: false
+        })
+    }
+}
