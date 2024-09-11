@@ -7,7 +7,7 @@ const JobsTemplate = ({ jobs, keyword }) => {
     return (
         <>  
             {
-                jobs.length === 0 && <p className="absolute top-1/2 right-1/3 font-semibold text-3xl">
+                jobs?.length === 0 && <p className="absolute top-1/2 right-1/3 font-semibold text-3xl">
                 Any job not found in {keyword}
               </p>
             }
