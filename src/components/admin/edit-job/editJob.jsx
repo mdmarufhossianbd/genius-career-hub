@@ -17,7 +17,7 @@ import EditSlug from "./editSlug";
 import EditThumbnail from "./editThumbnailUrl";
 
 const EditJobComponents = ({ job }) => {
-    const {_id, title, slug, category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, vacancy, applyLink, companyInfo, meta, author, age, eudcation} = job;
+    const {_id, title, slug, category, company, description, experince, experinceDuration, jobDeadline, jobType, location, salary, thumbnailUrl, vacancy, applyLink, companyInfo, meta, author, age, education} = job;
 
     const [newtitle, setTitle] = useState(title);
     const [newSlug, setSlug] = useState(slug);
@@ -36,7 +36,7 @@ const EditJobComponents = ({ job }) => {
     const [newApplyLink, setApplyLink] = useState(applyLink);
     const [isLoading, setLoading] = useState(false);
     const [newAge, setAge] = useState(age);
-    const [newEudcation, setEducation] = useState(eudcation)
+    const [newEudcation, setEducation] = useState(education)
     
     const handlePublish = async() => {
         setLoading(true)
@@ -60,7 +60,7 @@ const EditJobComponents = ({ job }) => {
             author,
             companyInfo,
             age : newAge,
-            eudcation : newEudcation
+            education : newEudcation
         }
         
         try {
@@ -94,7 +94,7 @@ const EditJobComponents = ({ job }) => {
                 <Input onChange={(e) => setVacancy(e.target.value)} defaultValue={newVacancy} className="border-black" placeholder="Enter Vacancy" />
                 <Input onChange={(e) => setSalary(e.target.value)} defaultValue={salary} className="border-black" placeholder="Enter Salary" />  
                 <Input onChange={(e) => setAge(e.target.value)} defaultValue={age} className="border-black" placeholder="Enter Age" />  
-                <Input onChange={(e) => setEducation(e.target.value)} defaultValue={eudcation} className="border-black" placeholder="Enter Education" />  
+                <Input onChange={(e) => setEducation(e.target.value)} defaultValue={education} className="border-black" placeholder="Enter Education" />
                 <EditExperience experince={experince} experinceDuration={experinceDuration} setExperince={setExperince} setExperinceDuration={setExperinceDuration} />
                 <EditDateline setJobDeadline={setJobDeadline} newJobDeadline={newJobDeadline}/>
                 <EditJobType jobType={jobType} setJobType={setJobType} />

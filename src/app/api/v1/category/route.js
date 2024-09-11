@@ -26,7 +26,7 @@ export async function POST(request) {
   }
 }
 
-export async function GET () {    
+export async function GET () {
     const db = await connectDB();
     const categoriesCollection = db.collection("categories")
     try {

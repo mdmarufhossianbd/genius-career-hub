@@ -1,39 +1,17 @@
-import { PublishJobs } from '@/utils/fetchJobs';
-import { IconArmchair2, IconCertificate, IconCurrentLocation, IconFileCertificate } from '@tabler/icons-react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { PublishJobs } from "@/utils/fetchJobs";
+import { IconArmchair2, IconCertificate, IconCurrentLocation, IconFileCertificate } from "@tabler/icons-react";
+import Image from "next/image";
+import Link from "next/link";
 
-export const metadata = {
-    title: 'Jobs || Genius Career Hub || The Largest Job Portal in Bangladesh.',
-    description: 'Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today',
-    openGraph: {
-        title: 'Jobs || Genius Career Hub || The Largest Job Portal in Bangladesh.',
-        description: 'Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today',
-        url: '/jobs',
-        siteName: 'Jobs || Genius Career Hub || The Largest Job Portal in Bangladesh.',
-        images: [
-            {
-                url: 'https://res.cloudinary.com/dgulbqzp8/image/upload/v1725479398/rftcpzu9sye32geejspq.webp',
-                width: 1200,
-                height: 630,
-                alt: 'Jobs || Genius Career Hub'
-            }
-        ],
-        type: 'website'
-    }
-}
-
-const Jobs = async () => {
-    const publishJobs = await PublishJobs()
+const CategoryJobs = async() => {
+    const jobs = await PublishJobs()
+    
     return (
-        <div className='flex'>
-            <div className=''>
-                ads 1
-            </div>
-            <div className='max-w-7xl w-full mx-auto my-20'>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>                    
+        <div>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-5 max-w-7xl mx-auto'>    
+                             
                     {
-                        publishJobs?.map(job =>
+                        jobs?.map(job =>
                             <Link key={job._id} href={`/jobs/${job?.slug}`}>
                                 <div className='p-4 bg-gradient-to-r from-[#e3ecf9] to-[#fff] border border-[#e3ecf9] hover:from-[#e3ecf9] hover:to-[#e3ecf9] duration-200 rounded flex items-center gap-5' >
                                     <div className='w-[80%] space-y-2'>
@@ -59,12 +37,8 @@ const Jobs = async () => {
                         )
                     }
                 </div>
-            </div>
-            <div className='sticky top-0'>
-                ads 2
-            </div>
         </div>
     );
 };
 
-export default Jobs;
+export default CategoryJobs;
