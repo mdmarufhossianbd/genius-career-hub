@@ -8,7 +8,7 @@ const JobsTemplate = ({ jobs, keyword }) => {
         <>  
             {
                 jobs?.length === 0 && <p className="absolute top-1/2 right-1/3 font-semibold text-3xl">
-                Any job not found in {keyword}
+                Any job not found for {keyword}
               </p>
             }
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>

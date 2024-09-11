@@ -4,8 +4,7 @@ import { useRouter } from 'next/navigation';
 import { toast, Toaster } from 'sonner';
 import bannerBG from '../../../public/assets/banner background.png';
 const Banner = () => {
-    const router = useRouter();
-    
+    const router = useRouter();   
     
     const handleSearch = async(e) => {
         e.preventDefault()
