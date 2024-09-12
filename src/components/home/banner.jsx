@@ -19,7 +19,7 @@ const Banner = async () => {
         <div className='my-10'>
 
             <div className="max-w-7xl mx-auto relative">
-                <Image className='w-auto md:h-auto h-[550px] rounded' src={bannerBG} width={1280} height={630} unoptimized priority alt='Genius career hub banner' />
+                <Image className='w-auto md:h-auto h-[600px] rounded' src={bannerBG} width={1280} height={630} unoptimized priority alt='Genius career hub banner' />
                 <div className='absolute lg:top-[15%] top-[8%] px-5 flex flex-col-reverse md:flex-row items-center justify-between w-full'>
                     <div className='md:w-[70%] w-full flex flex-col items-center'>
                         <h2 className='md:text-3xl text-2xl font-semibold text-white md:mb-5 mb-3'>Find your drem jobs</h2>
@@ -34,7 +34,6 @@ const Banner = async () => {
                             <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Chattogram'}>Chattogram ({chattogram?.length})</Link>
                             <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Rangpur'}>Rangpur ({rangpur?.length})</Link>
                             <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Mymensingh'}>Mymensingh ({mymensingh?.length})</Link>
-
                         </div>
                     </div>
                     <div className='md:w-[30%] w-1/2 md:block'>

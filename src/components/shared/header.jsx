@@ -1,43 +1,88 @@
+'use client'
+import { IconCaretDownFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import logo from '../../../public/assets/Genius Career Hub.png';
-import { Button } from "../ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 const Header = () => {
-
+    const pathname = usePathname()
+    const navLinks = [
+        {
+            title: 'Govt Jobs',
+            link: '/government-job-circular'
+        },
+        {
+            title: 'NGO Jobs',
+            link: '/ngo-job-circular'
+        },
+        {
+            title: 'Bank Jobs',
+            link: '/bank-job-circular'
+        },
+        {
+            title: 'Admit Card',
+            link: '/admit-card'
+        },
+        {
+            title: 'Result',
+            link: '/result'
+        },
+    ]
     return (
-        <header className='h-20 border-b border-[#e4e4e8] sticky top-0 drop-shadow-sm flex items-center bg-[#fcfcfc] z-20'>
-            <div className="flex justify-between items-center max-w-7xl mx-auto flex-1">
+        <div className="border-b py-2 sticky top-0 bg-[#f6f8fc] z-50">
+            {/* logo */}
+            <div className="max-w-7xl mx-auto flex justify-between items-center px-3">
                 <div>
-                    <Link href={'/'} className="text-2xl font-semibold">
-                        <Image className="w-[200px] h-[80px] rounded" src={logo} alt="Genius Career Hub" height={80} width={200} unoptimized priority/>                        
+                    <Link href={'/'}>
+                        <Image className="rounded h-[70px] w-auto" src={logo} width={230} height={70} alt="Genius Career Hub" priority unoptimized />
                     </Link>
                 </div>
-                <div className="md:flex gap-3 hidden">
+                {/* large screen navlinks */}
+                <div className="lg:flex gap-2 hidden">
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90 h-9 px-4 py-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-300">
-                        Popular Job Categories
+                        <DropdownMenuTrigger className="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 flex gap-1">Popular Categories <IconCaretDownFilled />
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuLabel>Select Category</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>
-                                <Link className="w-full" href={'/category/ngo-job-circular'}>NGO Job Circular</Link>
-                            </DropdownMenuItem>
-                            
+                        <DropdownMenuContent>         
+                            {/* load all post categories in there with clicable links */}
+                            <DropdownMenuItem>Team</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button> <Link href={'/government-job-circular'}>Govt Job Circular</Link></Button>
-                    <Button> <Link href={'/ngo-job-circular'}>NGO Job Circular</Link></Button>
-                    <Button> <Link href={'/bank-job-circular'}>Bank Job Circular</Link></Button>
-                    <Button> <Link href={'/result'}>Result</Link></Button>
-                    <Button> <Link href={'/admit-card'}>Admit Card</Link></Button>
-                    <Button> <Link href={'/notice'}>Notice</Link></Button>
+                    {
+                        navLinks.map((link, idx) => (
+                            <Link href={link.link} key={idx} className={`lg:px-3 px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 ${pathname === link.link && 'bg-blue-700'}`}>{link.title}</Link>
+                        ))
+                    }
+                    <Link className={`px-4 py-1 rounded bg-red-500 text-white hover:bg-red-600 ${pathname === '/notice' && 'bg-red-600'}`} href={'/notice'}>Notice</Link>
+                </div>
+                {/* mobile screen navlinks */}
+                <div className="lg:hidden">
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 flex gap-1">Menus            <IconCaretDownFilled />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuSub>
+                                <DropdownMenuSubTrigger>Popular Categroies</DropdownMenuSubTrigger>
+                                <DropdownMenuPortal>
+                                    <DropdownMenuSubContent>
+                                        <DropdownMenuItem>Email</DropdownMenuItem>
+                                        {/* load all category in there with clickable links */}
+                                    </DropdownMenuSubContent>
+                                </DropdownMenuPortal>
+                            </DropdownMenuSub>
+                            {
+                                navLinks.map((link, idx) => (
+                                    <DropdownMenuItem key={idx}>
+                                        <Link href={link.link}>{link.title}</Link>
+                                    </DropdownMenuItem>
+                                ))
+                            }                           
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
             </div>
-
-        </header>
+        </div>
     );
 };
 
