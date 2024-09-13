@@ -104,7 +104,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="flex items-center justify-center bg-[#292929] py-2">
-                <p className="text-white">© {new Date().getFullYear().toString()} All Right reserved by <Link href={'/'} target="_blank" className="text-[#FCFCFC] hover:text-[#0da7da] duration-300">Genius Career Hub</Link></p>
+                <p className="text-white">© {new Date().getFullYear().toString()} All Right reserved by <Link href={'/'} target="_blank" className="text-[#0da7da] hover:text-[#32bde0] duration-300">Genius Career Hub</Link></p>
             </div>
         </div>
     );
