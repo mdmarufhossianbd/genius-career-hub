@@ -1,7 +1,7 @@
 import { PublishJobs } from '@/utils/fetchJobs';
 import Image from 'next/image';
 import Link from 'next/link';
-import bannerBG from '../../../public/assets/banner background.svg';
+import bannerBG from '../../../public/assets/banner background.webp';
 import bannerImage from '../../../public/assets/banner image.png';
 import BannerSearch from './bannerSearch';
 const Banner = async () => {
@@ -19,7 +19,7 @@ const Banner = async () => {
         <div className='my-10'>
 
             <div className="max-w-7xl mx-auto relative">
-                <Image className='w-auto md:h-auto h-[600px] rounded' src={bannerBG} width={1280} height={630} unoptimized priority alt='Genius career hub banner' />
+                <Image className='w-[960px] md:w-auto md:h-auto h-[530px] rounded' src={bannerBG} width={1280} height={630} unoptimized priority alt='Genius career hub banner' />
                 <div className='absolute lg:top-[15%] top-[8%] px-5 flex flex-col-reverse md:flex-row items-center justify-between w-full'>
                     <div className='md:w-[70%] w-full flex flex-col items-center'>
                         <h2 className='md:text-3xl text-2xl font-semibold text-white md:mb-5 mb-3'>Find your drem jobs</h2>
