@@ -25,15 +25,15 @@ const Banner = async () => {
                         <h2 className='md:text-3xl text-2xl font-semibold text-white md:mb-5 mb-3'>Find your drem jobs</h2>
                         <BannerSearch />
                         <div className='md:my-10 mt-3 grid md:grid-cols-3 grid-cols-2 md:gap-5 gap-2'>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 col-span-2 xl:col-span-1' href={'/job-location?location=Bangladesh'}>Anywhere in Bangladesh ({anyWhereInBangladesh?.length})</Link>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Dhaka'}>Dhaka ({dhaka?.length})</Link>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Barishal'}>Barishal ({barishal?.length})</Link>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Khulna'}>Khulna ({khulna?.length})</Link>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Rajshahi'}>Rajshahi ({rajshahi?.length})</Link>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Sylhet'}>Sylhet ({sylhet?.length})</Link>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Chattogram'}>Chattogram ({chattogram?.length})</Link>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Rangpur'}>Rangpur ({rangpur?.length})</Link>
-                            <Link className='px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600' href={'/job-location?location=Mymensingh'}>Mymensingh ({mymensingh?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white col-span-2 xl:col-span-1' href={'/job-location?location=Bangladesh'}>Anywhere in Bangladesh ({anyWhereInBangladesh?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white' href={'/job-location?location=Dhaka'}>Dhaka ({dhaka?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white' href={'/job-location?location=Barishal'}>Barishal ({barishal?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white' href={'/job-location?location=Khulna'}>Khulna ({khulna?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white' href={'/job-location?location=Rajshahi'}>Rajshahi ({rajshahi?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white' href={'/job-location?location=Sylhet'}>Sylhet ({sylhet?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white' href={'/job-location?location=Chattogram'}>Chattogram ({chattogram?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white' href={'/job-location?location=Rangpur'}>Rangpur ({rangpur?.length})</Link>
+                            <Link className='px-2 py-1 rounded bg-gradient-to-r from-[#2E3241] to-[#171C2C] hover:from-[#171C2C] hover:to-[#171C2C] text-white' href={'/job-location?location=Mymensingh'}>Mymensingh ({mymensingh?.length})</Link>
                         </div>
                     </div>
                     <div className='md:w-[30%] w-1/2 md:block'>
