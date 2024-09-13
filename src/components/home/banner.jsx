@@ -1,7 +1,7 @@
 import { PublishJobs } from '@/utils/fetchJobs';
 import Image from 'next/image';
 import Link from 'next/link';
-import bannerBG from '../../../public/assets/banner background.png';
+import bannerBG from '../../../public/assets/banner background.svg';
 import bannerImage from '../../../public/assets/banner image.png';
 import BannerSearch from './bannerSearch';
 const Banner = async () => {
