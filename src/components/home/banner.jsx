@@ -2,7 +2,7 @@ import { PublishJobs } from '@/utils/fetchJobs';
 import Image from 'next/image';
 import Link from 'next/link';
 import bannerBG from '../../../public/assets/banner background.webp';
-import bannerImage from '../../../public/assets/banner image.png';
+import bannerImage from '../../../public/assets/banner image.webp';
 import BannerSearch from './bannerSearch';
 const Banner = async () => {
     const publishedJobs = await PublishJobs();
@@ -16,7 +16,7 @@ const Banner = async () => {
     const rangpur = publishedJobs.filter(item => item.location === 'Rangpur');
     const mymensingh = publishedJobs.filter(item => item.location === 'Mymensingh');
     return (
-        <div className='my-10'>
+        <div className='md:my-10 my-3'>
 
             <div className="max-w-7xl mx-auto relative">
                 <Image className='w-[960px] md:w-auto md:h-auto h-[530px] rounded' src={bannerBG} width={1280} height={630} unoptimized priority alt='Genius career hub banner' />

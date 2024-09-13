@@ -3,7 +3,7 @@ import { IconCaretDownFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import logo from '../../../public/assets/Genius Career Hub.png';
+import logo from '../../../public/assets/Genius Career Hub.webp';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 const Header = () => {
@@ -36,30 +36,30 @@ const Header = () => {
             <div className="max-w-7xl mx-auto flex justify-between items-center px-3">
                 <div>
                     <Link href={'/'}>
-                        <Image className="rounded h-[70px] w-auto" src={logo} width={230} height={70} alt="Genius Career Hub" priority unoptimized />
+                        <Image className="rounded h-[70px] w-auto" src={logo} width={230} height={80} alt="Genius Career Hub" priority unoptimized />
                     </Link>
                 </div>
                 {/* large screen navlinks */}
                 <div className="lg:flex gap-2 hidden">
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 flex gap-1">Popular Categories <IconCaretDownFilled />
+                        <DropdownMenuTrigger className="px-4 py-1 rounded bg-[#1e508c] text-white hover:bg-[#2970c7] flex gap-1">Popular Categories <IconCaretDownFilled />
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent>         
+                        <DropdownMenuContent>
                             {/* load all post categories in there with clicable links */}
                             <DropdownMenuItem>Team</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                     {
                         navLinks.map((link, idx) => (
-                            <Link href={link.link} key={idx} className={`lg:px-3 px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 ${pathname === link.link && 'bg-blue-700'}`}>{link.title}</Link>
+                            <Link href={link.link} key={idx} className={`lg:px-3 px-2 py-1 rounded bg-[#1e508c] text-white hover:bg-[#2970c7] ${pathname === link.link && 'bg-[#2970c7]'}`}>{link.title}</Link>
                         ))
                     }
-                    <Link className={`px-4 py-1 rounded bg-red-500 text-white hover:bg-red-600 ${pathname === '/notice' && 'bg-red-600'}`} href={'/notice'}>Notice</Link>
+                    <Link className={`px-4 py-1 rounded bg-[#F58F8F] text-black hover:text-white hover:bg-[#ef4444] duration-300 ${pathname === '/notice' && 'bg-[#ef4444] text-white'}`} href={'/notice'}>Notice</Link>
                 </div>
                 {/* mobile screen navlinks */}
                 <div className="lg:hidden">
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 flex gap-1">Menus            <IconCaretDownFilled />
+                        <DropdownMenuTrigger className="px-4 py-1 rounded bg-[#1e508c] text-white hover:bg-blue-600 flex gap-1">Menus            <IconCaretDownFilled />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
                             <DropdownMenuSub>
