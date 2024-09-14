@@ -3,7 +3,7 @@ import { PublishJobs } from "@/utils/fetchJobs";
 
 const NGO = async () => {
     const publishJobs = await PublishJobs()
-    const ngoJobs = publishJobs.filter(item => item.category === 'NGO - Non Government Organization')
+    const ngoJobs = publishJobs.filter(item => item.category === 'NGO')
     return (
         <div className="max-w-7xl mx-auto">
             <h2 className="my-10 font-bold text-4xl">NGO job circular</h2>

@@ -12,7 +12,7 @@ const fetchCategoryJobs = async (slug) => {
 
 const CategoryJobs = async ({ params }) => {
     const [jobs, categoryDetails, totalJobs] = await fetchCategoryJobs(params.slug)
-    console.log('categoryDetails =>', categoryDetails);
+    
     return (
         <div>
             <div className="max-w-7xl mx-auto my-10 lg:px-3 md:px-5 px-3">

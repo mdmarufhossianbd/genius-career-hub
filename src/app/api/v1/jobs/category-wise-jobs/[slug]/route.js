@@ -9,7 +9,6 @@ export async function GET(request, {params}) {
     try {
         const query = {slug : slug}
         const categoryDetails = await categoryCollection.findOne(query)
-        console.log('categoryDetails in backend =>',categoryDetails);
         const categoryName = categoryDetails.categoryName
         const jobQuery = {category : categoryName}
         const result = await jobCollection.find(jobQuery).toArray();
