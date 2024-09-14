@@ -3,5 +3,5 @@ export const getCategories = async () => {
     const res = await fetch(`${baseUrl}/api/v1/category`, {cache : 'no-store'})
     const data = await res.json();
     const categories = data.result
-    return categories
+    return categories || []
 }
