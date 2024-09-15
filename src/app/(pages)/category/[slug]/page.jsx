@@ -1,6 +1,29 @@
 import CategoryJobsWithPagination from "@/components/category/category";
 import { fetchCategoryJobs } from "@/utils/fetchCategories";
 
+export async function generateMetadata({params}) {
+    const {slug} = params;
+    const [jobs, categoryDetails] = await fetchCategoryJobs(slug)
+    return {
+        title : `${categoryDetails?.categoryName} || Genius Career Hub`,
+        description : categoryDetails?.description,
+        openGraph : {
+            title : `${categoryDetails?.categoryName} || Genius Career Hub`,
+            description : categoryDetails?.description,
+            url : `/category/${slug}`,
+            images : [
+                {
+                    url : 'https://res.cloudinary.com/dgulbqzp8/image/upload/v1726388509/genius-career-hub/assets/aabr38fiiylqutbdpckb.png',
+                    width : 1200,
+                    height : 630,
+                    alt : categoryDetails?.categoryName
+                }
+            ],
+            type : 'article'
+        }
+    }
+}
+
 const CategoryJobs = async ({ params }) => {
     const { slug } = params;
     const [jobs, categoryDetails, totalJobs] = await fetchCategoryJobs(slug);
