@@ -1,24 +1,46 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    darkMode: ["class"],
-    content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  theme: {
-  	extend: {
-  		backgroundImage: {
-  			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-  			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		},
-  		colors: {}
-  	}
-  },
-  plugins: [require("tailwindcss-animate"),],
+	darkMode: ["class"],
+	content: [
+		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+	],
+	theme: {
+		extend: {
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+			},
+			borderRadius: {
+				lg: 'var(--radius)',
+				md: 'calc(var(--radius) - 2px)',
+				sm: 'calc(var(--radius) - 4px)'
+			},
+			colors: {},
+			animation: {
+				marquee: "marquee var(--duration) linear infinite",
+				"marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+			},
+			keyframes: {
+				marquee: {
+					from: {
+						transform: "translateX(0)"
+					},
+					to: {
+						transform: "translateX(calc(-100% - var(--gap)))"
+					},
+				},
+				"marquee-vertical": {
+					from: {
+						transform: "translateY(0)"
+					},
+					to: {
+						transform: "translateY(calc(-100% - var(--gap)))"
+					},
+				},
+			},
+		}
+	},
+	plugins: [require("tailwindcss-animate"), ],
 };
