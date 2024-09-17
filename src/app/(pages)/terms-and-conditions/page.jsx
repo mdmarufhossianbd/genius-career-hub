@@ -1,11 +1,10 @@
+import PageIntro from "@/components/shared/pageIntro";
 import Link from "next/link";
 
 const TermsAndConditions = () => {
     return (
         <div className='max-w-7xl mx-auto xl:px-0 px-5'>
-            <div className="py-10 bg-blue-200 my-10 rounded-lg">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-center">Terms and Conditions</h2>
-            </div>
+            <PageIntro pageName={'Terms and Conditions'} />
             <div className="space-y-5 mb-10">
                 <p>Welcome to https://geniuscareerhub.com</p>
                 <p>These terms and conditions outline the rules and regulations for the use of Genius Career Hub Website, located at https://geniuscareerhub.com.</p>

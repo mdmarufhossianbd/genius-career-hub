@@ -1,11 +1,10 @@
+import PageIntro from "@/components/shared/pageIntro";
 import Link from "next/link";
 
 const PrivacyPolicy = () => {
     return (
         <div className="max-w-7xl mx-auto xl:px-0 px-5">
-            <div className="py-10 bg-blue-200 my-10 rounded-lg">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-center">Privacy Policy</h2>
-            </div>
+            <PageIntro pageName={'Privacy Policy'}/>
             <div className="space-y-5 mb-10">
                 <p className="text-justify">Your privacy is important to us. It is Genius Career Hub&apos;s policy to respect your privacy regarding any information we may collect from you across our website, <Link className="font-medium text-blue-600" href={'/'}>https://geniuscareerhub.com</Link>, and other sites we own and operate.</p>
                 <p className="text-justify">We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we&apos;re collecting it and how it will be used.</p>
