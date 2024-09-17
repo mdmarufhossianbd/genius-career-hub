@@ -6,7 +6,7 @@ import { PiPhoneCallFill } from "react-icons/pi";
 
 const Contact = () => {
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto mb-10">
             <PageIntro pageName={'Contact'} />
             <div className="md:flex md:gap-10 bg-[#1e508c] p-5 rounded">
                 <div className="md:w-1/2">
