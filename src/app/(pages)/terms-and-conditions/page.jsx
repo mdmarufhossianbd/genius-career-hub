@@ -1,6 +1,26 @@
 import PageIntro from "@/components/shared/pageIntro";
 import Link from "next/link";
 
+export const metadata = {
+    title: "Terms and Conditions - Genius Career Hub is the largest BD Job News portal in Bangladesh",
+    description: "Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today",
+    openGraph: {
+        title: "Terms and Conditions - Genius Career Hub is the largest BD Job News portal in Bangladesh",
+        description: "Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today",
+        url: '/terms-and-conditions',
+        siteName: 'Genius Career Hub',
+        images: [
+            {
+                url: 'https://res.cloudinary.com/dgulbqzp8/image/upload/v1726388509/genius-career-hub/assets/aabr38fiiylqutbdpckb.png',
+                width: 1200,
+                height: 630,
+                alt: 'Genius Career Hub'
+            }
+        ],
+        type: 'website'
+    }
+};
+
 const TermsAndConditions = () => {
     return (
         <div className='max-w-7xl mx-auto xl:px-0 px-5'>

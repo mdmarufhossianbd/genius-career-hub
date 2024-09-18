@@ -4,12 +4,12 @@ import Link from "next/link";
 import aboutUsImage from '../../../../public/assets/about us.webp';
 
 export const metadata = {
-    title: "About - Genius Career Hub || The Largest Job Portal in Bangladesh.",
-    description: "Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today!",
+    title: "About - Genius Career Hub is the largest BD Job News portal in Bangladesh",
+    description: "Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today",
     openGraph: {
-        title: "About - Genius Career Hub || The Largest Job Portal in Bangladesh.",
-        description: "Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today!",
-        url: 'https://genius-career-hub.vercel.app',
+        title: "About - Genius Career Hub is the largest BD Job News portal in Bangladesh",
+        description: "Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today",
+        url: '/about',
         siteName: 'Genius Career Hub',
         images: [
             {

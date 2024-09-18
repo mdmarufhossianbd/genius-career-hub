@@ -7,12 +7,12 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Genius Career Hub || The Largest Job Portal in Bangladesh.",
-  description: "Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today!",
+  title: "Genius Career Hub is the largest BD Job News portal in Bangladesh",
+  description: "Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today",
   openGraph: {
-    title: "Genius Career Hub || The Largest Job Portal in Bangladesh.",
-    description: "Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today!",
-    url : 'https://genius-career-hub.vercel.app',
+    title: "Genius Career Hub is the largest BD Job News portal in Bangladesh",
+    description: "Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today",
+    url : '/',
     siteName : 'Genius Career Hub',
     images : [
       {

@@ -4,13 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata = {
-    title: 'Jobs || Genius Career Hub || The Largest Job Portal in Bangladesh.',
-    description: 'Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today',
+    title: 'BD Job News	|| Genius Career Hub is the largest BD Job News portal in Bangladesh',
+    description: 'Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today',
     openGraph: {
-        title: 'Jobs || Genius Career Hub || The Largest Job Portal in Bangladesh.',
-        description: 'Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today',
+        title: 'BD Job News	|| Genius Career Hub is the largest BD Job News portal in Bangladesh',
+        description: 'Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today',
         url: '/jobs',
-        siteName: 'Jobs || Genius Career Hub || The Largest Job Portal in Bangladesh.',
+        siteName: 'BD Job News	|| Genius Career Hub is the largest BD Job News portal in Bangladesh',
         images: [
             {
                 url: 'https://res.cloudinary.com/dgulbqzp8/image/upload/v1725479398/rftcpzu9sye32geejspq.webp',

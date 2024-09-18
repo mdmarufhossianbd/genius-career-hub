@@ -11,7 +11,7 @@ export const connectDB = async () => {
         deprecationErrors: true,
       },
     });
-    db = client.db('genius-career-hub')
+    db = client.db('geniusCareerHub')
     console.log('connect db');
     return db;
   } catch (error) {

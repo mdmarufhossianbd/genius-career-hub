@@ -1,6 +1,26 @@
 import JobsTemplate from "@/components/shared/jobsTemplate";
 import { PublishJobs } from "@/utils/fetchJobs";
 
+export const metadata = {
+    title: "NGO Job Circular - Genius Career Hub is the largest BD Job News portal in Bangladesh",
+    description: "Looking for the latest NGO job circular updates? Our platform provides the most up-to-date and comprehensive listings for non-government organization jobs in Bangladesh. Whether you`'`re passionate about humanitarian work, development, or social welfare, explore exciting career opportunities in top NGOs. Stay ahead with daily updates on NGO job circulars and find the perfect role that matches your skills and aspirations. Don`'`t miss out on the chance to contribute to meaningful causes while advancing your career in the NGO sector.",
+    openGraph: {
+        title: "NGO job circular - Genius Career Hub is the largest BD Job News portal in Bangladesh",
+        description: "Looking for the latest NGO job circular updates? Our platform provides the most up-to-date and comprehensive listings for non-government organization jobs in Bangladesh. Whether you`'`re passionate about humanitarian work, development, or social welfare, explore exciting career opportunities in top NGOs. Stay ahead with daily updates on NGO job circulars and find the perfect role that matches your skills and aspirations. Don`'`t miss out on the chance to contribute to meaningful causes while advancing your career in the NGO sector.",
+        url: '/ngo-job-circular',
+        siteName: 'Genius Career Hub',
+        images: [
+            {
+                url: 'https://res.cloudinary.com/dgulbqzp8/image/upload/v1726388509/genius-career-hub/assets/aabr38fiiylqutbdpckb.png',
+                width: 1200,
+                height: 630,
+                alt: 'Genius Career Hub'
+            }
+        ],
+        type: 'website'
+    }
+};
+
 const NGO = async () => {
     const publishJobs = await PublishJobs()
     const ngoJobs = publishJobs.filter(item => item.category === 'NGO')

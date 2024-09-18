@@ -1,6 +1,26 @@
 import PageIntro from "@/components/shared/pageIntro";
 import Link from "next/link";
 
+export const metadata = {
+    title: "Privacy - Policy - Genius Career Hub || The Largest Job Portal in Bangladesh.",
+    description: "Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today!",
+    openGraph: {
+        title: "Privacy - Policy - Genius Career Hub || The Largest Job Portal in Bangladesh.",
+        description: "Genius Career Hub is the leading job portal in Bangladesh, offering a vast range of job opportunities across various industries. Connect with top employers and find your dream job today!",
+        url: 'https://geniuscareerhub.com',
+        siteName: 'Genius Career Hub',
+        images: [
+            {
+                url: 'https://res.cloudinary.com/dgulbqzp8/image/upload/v1726388509/genius-career-hub/assets/aabr38fiiylqutbdpckb.png',
+                width: 1200,
+                height: 630,
+                alt: 'Genius Career Hub'
+            }
+        ],
+        type: 'website'
+    }
+};
+
 const PrivacyPolicy = () => {
     return (
         <div className="max-w-7xl mx-auto xl:px-0 px-5">
