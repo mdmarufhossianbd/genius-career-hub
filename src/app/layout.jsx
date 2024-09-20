@@ -12,17 +12,17 @@ export const metadata = {
   openGraph: {
     title: "Genius Career Hub is the largest BD Job News portal in Bangladesh",
     description: "Genius Career Hub is the largest BD Job News portal in Bangladesh. Offering a vast range of BD Job News opportunities across various industries. Connect with top employers and find your dream job today",
-    url : '/',
-    siteName : 'Genius Career Hub',
-    images : [
+    url: '/',
+    siteName: 'Genius Career Hub',
+    images: [
       {
-        url : 'https://res.cloudinary.com/dgulbqzp8/image/upload/v1726388509/genius-career-hub/assets/aabr38fiiylqutbdpckb.png',
-        width : 1200,
-        height : 630,
-        alt : 'Genius Career Hub'
+        url: 'https://res.cloudinary.com/dgulbqzp8/image/upload/v1726388509/genius-career-hub/assets/aabr38fiiylqutbdpckb.png',
+        width: 1200,
+        height: 630,
+        alt: 'Genius Career Hub'
       }
     ],
-    type : 'website'
+    type: 'website'
   }
 };
 
