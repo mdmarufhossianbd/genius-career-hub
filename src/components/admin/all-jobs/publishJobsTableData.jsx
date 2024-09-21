@@ -22,7 +22,7 @@ const PublishJobsTableData =  ({ publishJobs }) => {
             toast.error(error.message)
         }
     }
-
+    
     return (
         <div className="rounded-md border">
             <Table>

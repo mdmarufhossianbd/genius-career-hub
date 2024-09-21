@@ -1,5 +1,6 @@
 import { checkAdmin } from "@/config/protectAPI";
 import { connectDB } from "@/lib/connectDB";
+import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -32,6 +33,32 @@ export async function POST(request) {
             message : 'Something went wrong',
             status : 500,
             success : false
+        })
+    }
+}
+
+export async function DELETE(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized){
+        return isUnauthorized
+    }
+    const db = await connectDB()
+    const noticeCollection = db.collection('notices')
+    try {
+        const {id} = await request.json()
+        const query = {_id : new ObjectId(id)}
+        const result = await noticeCollection.deleteOne(query)
+        return NextResponse.json({
+            message : 'Successfully delete notice',
+            status : 200,
+            result,
+            success : true
+        })
+    } catch (error) {
+        return NextResponse.json({
+            message : 'Something went wrong',
+            status : 500,
+            success : false           
         })
     }
 }

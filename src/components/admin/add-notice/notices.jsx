@@ -2,9 +2,11 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
+import axios from "axios";
+import { toast } from "sonner";
 
 
-const Notices = ({ notices, page, setPage, totalPages }) => {
+const Notices = ({ notices, page, setPage, totalPages, setDeleted }) => {
 
     const handleNext = () => {
         setPage(page + 1)
@@ -13,8 +15,19 @@ const Notices = ({ notices, page, setPage, totalPages }) => {
         setPage(page - 1)
     }
 
+    const handleDelte = async(id) => {
+        await axios.delete('/api/v1/notice', {data : {id}})
+        .then(res => {
+            if(res.data?.result?.acknowledged){
+                setDeleted(true)
+                toast.success(res.data?.message)
+            }
+            setDeleted(true)
+        })
+    }
+
     return (
-        <>
+        <div>
             <div className="border my-5 rounded">
                 <Table>
                     <TableHeader>
@@ -42,7 +55,7 @@ const Notices = ({ notices, page, setPage, totalPages }) => {
                                             <DropdownMenuContent>
                                                 <DropdownMenuItem>View</DropdownMenuItem>
                                                 <DropdownMenuItem>Edit</DropdownMenuItem>
-                                                <DropdownMenuItem>Delete</DropdownMenuItem>
+                                                <DropdownMenuItem onClick={() => {handleDelte(item._id)}} className='hover:cursor-pointer'>Delete</DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
 
@@ -60,7 +73,7 @@ const Notices = ({ notices, page, setPage, totalPages }) => {
                     <button onClick={handleNext} disabled={page === totalPages} className='flex gap-1 px-5 py-2 bg-[#1e508c] hover:bg-[#184174] text-white duration-500 rounded-md disabled:cursor-not-allowed disabled:bg-[#f6f8fc] disabled:text-black'>Next<IconArrowNarrowRight stroke={2} /></button>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
