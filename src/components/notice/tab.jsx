@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
+import ViewNotice from "./viewNotice";
 const Tab = () => {
     const [activeTab, setActiveTab] = useState('general')
-
-
 
     return (
         <div>
@@ -18,30 +17,30 @@ const Tab = () => {
             <div className="border rounded my-5 py-5">
                 {
                     activeTab === 'general' &&
-                    <>
-
-
-                        <div className="p-8 mx-5 rounded-2xl border-b flex items-center justify-between">
+                    <div className="space-y-5">
+                        <div className="p-8 mx-5 rounded-2xl border-b border-t flex items-center justify-between">
                             <div className="w-[85%]">
                                 <h2 className="font-semibold mb-2">সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর</h2>
                                 <p>Published Date : 10 / 10 / 2024</p>
                             </div>
                             <div className="w-[15%] flex items-center justify-center">
-                                <Button>See Details</Button>
+                                <Button>
+                                    <ViewNotice />
+                                </Button>
                             </div>
                         </div>
-
-
-                        <div className="p-8 mx-5 rounded-2xl border-b flex items-center justify-between">
+                        <div className="p-8 mx-5 rounded-2xl border-b border-t flex items-center justify-between">
                             <div className="w-[85%]">
                                 <h2 className="font-semibold mb-2">সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর সাটঁ মুদ্রাক্ষরিক কাম কম্পিউটার অপারেটর</h2>
                                 <p>Published Date : 10 / 10 / 2024</p>
                             </div>
                             <div className="w-[15%] flex items-center justify-center">
-                                <Button>See Details</Button>
+                                <Button>
+                                    <ViewNotice />
+                                </Button>
                             </div>
                         </div>
-                    </>
+                    </div>
                 }
                 {
                     activeTab === 'exam' && <>

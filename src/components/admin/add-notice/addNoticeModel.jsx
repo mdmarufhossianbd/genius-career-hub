@@ -1,26 +1,45 @@
 'use client'
+import CustomLoading from "@/components/shared/customLoading";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { getAllNotices } from "@/utils/fetchNotices";
+import axios from "axios";
 import { useState } from "react";
+import { toast } from "sonner";
 
 
-const AddNoticeModel = () => {
+const AddNoticeModel = ({setAddNotice}) => {
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [category, setCategory] = useState();
     const [pdfLink, setPdfLink] = useState();
+    const [loading, setLoading] = useState(false)
 
     const handleAddNotice = async() => {
+        setLoading(true)
         const noticeInfo = {
             title, description, category, pdfLink
         }
-        console.log(noticeInfo);
+        await axios.post('/api/v1/notice', noticeInfo)
+        .then(res => {
+            console.log(res.data);
+            if(res.data.success){
+                setLoading(false)
+                setAddNotice(true)
+                toast.success(res.data.message)
+            } else {
+                setLoading(false)
+                toast.error(res.data.message)
+            }  
+        })
+        await getAllNotices()
     }
 
     return (
         <AlertDialog>
+            <CustomLoading isLoading={loading}/>
             <AlertDialogTrigger className="px-5 py-2 rounded bg-[#1e508c] hover:bg-[#235ca1] text-white">
             Add New Notice
             </AlertDialogTrigger>
