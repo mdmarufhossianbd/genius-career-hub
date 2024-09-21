@@ -1,5 +1,5 @@
 "use client"
-import { IconBriefcaseFilled, IconCategoryFilled, IconHomeFilled, IconSquareRoundedPlusFilled } from '@tabler/icons-react';
+import { IconBellRingingFilled, IconBriefcaseFilled, IconCategoryFilled, IconHomeFilled, IconSquareRoundedPlusFilled } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -22,6 +22,11 @@ const Sidebar = () => {
             name: "All Jobs",
             href: "/admin/all-jobs",
             icon: <IconBriefcaseFilled />
+        },
+        {
+            name: "Notice",
+            href: "/admin/notice",
+            icon: <IconBellRingingFilled />
         },
         {
             name: "Category",

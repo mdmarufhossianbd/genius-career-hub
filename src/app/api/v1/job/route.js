@@ -82,9 +82,7 @@ export async function PUT(request) {
     try {
         const data = await request.json();
         const companyInfo = await companyCollection.findOne({name : data.company})
-        const query = {
-            _id: new ObjectId(data._id)
-        }
+        const query = {_id: new ObjectId(data._id)}
         const oparation = {
             $set: {
                 publishStatus: "published",

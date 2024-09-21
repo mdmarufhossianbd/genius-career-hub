@@ -1,12 +1,11 @@
 'use client'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import axios from "axios";
 import { toast } from "sonner";
+import EditNotice from "../notice/editNotice";
 
-
-const Notices = ({ notices, page, setPage, totalPages, setDeleted }) => {
+const Notices = ({ notices, page, setPage, totalPages, setDeleted, setEdit }) => {
 
     const handleNext = () => {
         setPage(page + 1)
@@ -49,16 +48,9 @@ const Notices = ({ notices, page, setPage, totalPages, setDeleted }) => {
                                     <TableCell>{item.description}</TableCell>
                                     <TableCell>{item.category}</TableCell>
                                     <TableCell>{item.pdfLink}</TableCell>
-                                    <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger className="bg-[#1e508c] text-white px-4 py-1.5 rounded hover:bg-[#2e76ce] duration-300">Action</DropdownMenuTrigger>
-                                            <DropdownMenuContent>
-                                                <DropdownMenuItem>View</DropdownMenuItem>
-                                                <DropdownMenuItem>Edit</DropdownMenuItem>
-                                                <DropdownMenuItem onClick={() => {handleDelte(item._id)}} className='hover:cursor-pointer'>Delete</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-
+                                    <TableCell className="text-right flex gap-2 items-center justify-center">
+                                        <EditNotice item={item} setEdit={setEdit} />
+                                        <button onClick={() => {handleDelte(item._id)}} className="bg-[#1e508c] text-white px-4 py-1.5 rounded hover:bg-[#2e76ce] duration-300">Delete</button>
                                     </TableCell>
                                 </TableRow>
                             ))

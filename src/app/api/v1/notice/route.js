@@ -63,6 +63,43 @@ export async function DELETE(request) {
     }
 }
 
+export async function PUT(request) {
+    const isUnauthorized = await checkAdmin();
+    if(isUnauthorized){
+        return isUnauthorized
+    }
+    const db = await connectDB()
+    const noticeCollection = db.collection('notices')
+    try {
+        const data = await request.json()
+        console.log(data);
+        const query = {_id : new ObjectId(data._id)}
+        const oparation = {
+            $set : {
+                title : data.title,
+                description : data.description,
+                category : data.category,
+                pdfLink : data.pdfLink
+            }
+        }
+        const upsert = {upsert : true};
+        const result = await noticeCollection.updateOne(query, oparation, upsert)
+        return NextResponse.json({
+            message : 'Notice updated',
+            status : 200,
+            success : true,
+            result,
+            data
+        })
+    } catch (error) {
+        return NextResponse.json({
+            message : 'Something went wrong',
+            status : 500,
+            success : false
+        })
+    }
+}
+
 export async function GET(request) {
     const db = await connectDB();
     const noticeCollection = db.collection('notices');

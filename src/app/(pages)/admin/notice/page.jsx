@@ -16,6 +16,7 @@ const AddNotice = () => {
     const [totalNotices, setTotalNotices] = useState();
     const [isLoading, setLoading] = useState(false)
     const [deleted, setDeleted] = useState(false)
+    const [edit, setEdit] = useState(false)
     
     useEffect(() => {
         const getAllNotices = async() => {
@@ -30,6 +31,7 @@ const AddNotice = () => {
                     setAddNotice(false)
                     setLoading(false)
                     setDeleted(false)
+                    setEdit(false)
                 }
                 setLoading(false)
             })
@@ -37,7 +39,7 @@ const AddNotice = () => {
         
         getAllNotices()
         
-    },[page, addNotice, deleted])
+    },[page, addNotice, deleted, edit])
 
     return (
         <div>
@@ -53,9 +55,9 @@ const AddNotice = () => {
                     <p>Total Notices : {totalNotices}</p>
                     <div>
                         <Input placeholder='search here' />
-                    </div>                    
+                    </div>               
                 </div>
-                <Notices notices={notices} page={page} setPage={setPage} totalPages={totalPages} setDeleted={setDeleted}/>
+                <Notices notices={notices} page={page} setPage={setPage} totalPages={totalPages} setDeleted={setDeleted} setEdit={setEdit}/>
             </div>
         </div>
     );
