@@ -9,7 +9,7 @@ const getJobDetails = async (slug) => {
 }
 
 const EditJob = async({params}) => {
-    const job = await getJobDetails(params.slug)    
+    const job = await getJobDetails(params.slug)
     return (
         <div className="px-5">
             <h2 className="text-4xl font-bold text-center my-10">Edit Job</h2>

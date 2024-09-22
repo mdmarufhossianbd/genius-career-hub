@@ -9,19 +9,19 @@ const SearchJobs = () => {
     const [keyword, setKeyword] = useState();
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState();
-    const router = useRouter()
-
-    const fetchJobs = async () => {
-        await axios.get(`/api/v1/location?keyword=${keyword}&page=${page}&limit=9`)
-        .then(res => {
-            setJobs(res.data.result)
-            setTotalPages(res.data.totalPage)
-        })        
-    }
+    const router = useRouter()    
 
     useEffect(() => {
+        const fetchJobs = async () => {
+            await axios.get(`/api/v1/location?keyword=${keyword}&page=${page}&limit=9`)
+            .then(res => {
+                setJobs(res.data.result)
+                setTotalPages(res.data.totalPage)
+            })        
+        }
         fetchJobs()
-    }, [])
+
+    }, [keyword, page])
 
     const handleSearch = (e) => {
         e.preventDefault();

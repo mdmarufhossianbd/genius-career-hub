@@ -13,8 +13,7 @@ const AddJobDetails = ({setDescription}) => {
     return (
         <>
             <p className='mb-2'>Job Description</p>
-            <Editor
-                
+            <Editor                
                 onKeyUp={content}
                 apiKey={apiKey}
                 onInit={(evt, editor) => editorRef.current = editor}

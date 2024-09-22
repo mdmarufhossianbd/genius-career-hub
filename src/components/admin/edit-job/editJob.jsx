@@ -8,9 +8,9 @@ import { useState } from "react";
 import { toast, Toaster } from "sonner";
 import EditCategory from "./editCategory";
 import EditCompany from "./editCompany";
+import EditContent from "./editContent";
 import EditDateline from "./editDateline";
 import EditExperience from "./editExperience";
-import EditJobDetails from "./editJobDetails";
 import EditJobType from "./editJobType";
 import EditLocation from "./editLocation";
 import EditSlug from "./editSlug";
@@ -87,7 +87,8 @@ const EditJobComponents = ({ job }) => {
                 <EditSlug setSlug={setSlug} newSlug={newSlug} />
                 <p className="py-1">Job Meta Description</p>
                 <Textarea onChange={(e) => setMeta(e.target.value)} rows={4} defaultValue={meta} placeholder='write meta description' />
-                <EditJobDetails setDescription={setDescription} description={description}/>                
+                {/* <EditJobDetails setDescription={setDescription} description={description}/>   */}
+                <EditContent setDescription={setDescription} description={description}/>
             </div>
             <div className="bg-slate-100 w-[20%] p-5 rounded-md flex flex-col gap-3">
                 <EditThumbnail setThumbnailUrl={setThumbnailUrl} thumbnailUrl={thumbnailUrl} newThumbnailUrl={newThumbnailUrl}/>

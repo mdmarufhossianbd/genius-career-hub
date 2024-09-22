@@ -1,6 +1,6 @@
 "use client"
+// import AddContent from "@/components/admin/add-job/addContent";
 import AddExperience from "@/components/admin/add-job/addExperience";
-import AddJobDetails from "@/components/admin/add-job/addJobDetails";
 import AddSlug from "@/components/admin/add-job/addSlug";
 import Addthumbnail from "@/components/admin/add-job/addthumbnail";
 import SelectCategory from "@/components/admin/add-job/selectCategory";
@@ -13,8 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+
+const AddContent = dynamic(() => import("@/components/admin/add-job/addContent"), {ssr : false})
 
 const AddJobs = () => {   
     const [title, setTitle] = useState();
@@ -88,7 +91,8 @@ const AddJobs = () => {
                     <AddSlug suggestSlug={suggestSlug} setUniqueSlug={setUniqueSlug} slugValid={slugValid} setSlugValid={setSlugValid} />
                     <p className="py-1">Job Meta Description</p>
                     <Textarea onChange={(e) => setMeta(e.target.value)} rows={3} placeholder='write meta description' />
-                    <AddJobDetails setDescription={setDescription} />                    
+                    {/* <AddJobDetails setDescription={setDescription} />                     */}
+                    <AddContent setDescription={setDescription} />
                 </div>
                 <div className="bg-slate-100 w-[19%] p-5 rounded-md flex flex-col gap-3">
                     <Addthumbnail setThumbnailUrl={setThumbnailUrl} />
