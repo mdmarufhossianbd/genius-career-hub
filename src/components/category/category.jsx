@@ -17,7 +17,7 @@ const CategoryJobsWithPagination = ({ slug }) => {
         const fetchCategoryJobs = async (slug, page) => {
             setLoading(true)
             const baseUrl = process.env.NEXT_PUBLIC_BASEURL;
-            await axios.get(`${baseUrl}/api/v1/jobs/category-wise-jobs/${slug}?page=${page}&limit=10`)
+            await axios.get(`${baseUrl}/api/v1/jobs/category-wise-jobs/${slug}?page=${page}&limit=2`)
             .then(res => {                
                 if(res.data.success){
                     setJobs(res.data?.result)
