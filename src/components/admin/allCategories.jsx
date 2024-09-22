@@ -25,13 +25,14 @@ const AllCategories = () => {
     }
     return (
         <div className='border rounded-md'>
-            <CustomLoading isLoading={isLoading}/>
+            {isLoading && <CustomLoading isLoading={isLoading}/>}
             <Toaster richColors position="top-right"  />
             <Table>
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-20">SL No</TableHead>
                         <TableHead>Name</TableHead>                        
+                        <TableHead>Description</TableHead>                        
                         <TableHead>Edit</TableHead>                        
                         <TableHead>Delete</TableHead>
                     </TableRow>
@@ -41,6 +42,7 @@ const AllCategories = () => {
                         categories.map((category, index) => <TableRow key={index}>
                             <TableCell>{index + 1}</TableCell>
                             <TableCell>{category.categoryName}</TableCell>
+                            <TableCell>{category.description?.slice(0, 150)}...</TableCell>
                             <TableCell>
                                 <EditCategory category={category} getCategories={getCategories} />
                                 

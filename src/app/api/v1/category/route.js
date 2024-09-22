@@ -12,17 +12,25 @@ export async function POST(request) {
     const db = await connectDB();
     const categoriesCollection = db.collection("categories");
   try {
-    const data = await request.json(); 
-    const categoryName = data?.categoryName;
-    const existCategoryName = await categoriesCollection.find({categoryName : categoryName}).toArray();
-    if(existCategoryName.length > 0){
-        return NextResponse.json({ message: 'Already added this category.', status: 406, success: true });       
+    const {categoryInfo} = await request.json();   
+    const slug = categoryInfo?.slug;
+    const existingSlug = await categoriesCollection.findOne({slug : slug});
+    if(existingSlug){
+        return NextResponse.json({ message: 'Slug is already used.', status: 406, success: false });       
     }
-    const result = await categoriesCollection.insertOne(data);
+
+    const categoryName = categoryInfo.categoryName;
+    const existingCategoryName = await categoriesCollection.findOne({categoryName : categoryName})
+
+    if(existingCategoryName){
+      return NextResponse.json({ message: 'Category name is already used.', status: 406, success: false });
+    }
+
+    const result = await categoriesCollection.insertOne(categoryInfo);
     return NextResponse.json({ message: 'Category added successfully', result, status: 200, success: true });
 
   } catch (error) {
-    return NextResponse.json({ message: 'Error receiving data', error: error.message }, { status: 500 });
+    return NextResponse.json({ message: 'Something went wrong', error: error.message }, { status: 500 });
   }
 }
 
@@ -49,7 +57,9 @@ export async function PATCH(request) {
     const filter = {_id : new ObjectId(data._id)};
     const oparation = {
       $set : {
-        categoryName : data.categoryName
+        categoryName : data.categoryName,
+        description : data.description,
+        slug : data.slug
       }
     }
     const result = await categoriesCollection.updateOne(filter, oparation)

@@ -1,9 +1,11 @@
 "use client"
 import useCategories from "@/app/hooks/useCategory";
 import AllCategories from "@/components/admin/allCategories";
+import PageIntro from "@/components/shared/pageIntro";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger, } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -11,12 +13,19 @@ import toast, { Toaster } from "react-hot-toast";
 const Category = () => {
     const [keyword, setKeyword] = useState();
     const [categoryName, setCategoryName] = useState();    
+    const [description, setDescription] = useState();
+    const [slug, setSlug] = useState();
     const [isLoading, setLoading] = useState(false);
     const [getCategories] = useCategories()
+    
+
     const handleSaveCategory = async () => {
         setLoading(true);
+        const categoryInfo = {
+            categoryName, description, slug
+        }
         try {
-            await axios.post('/api/v1/category', { categoryName })
+            await axios.post('/api/v1/category', { categoryInfo })
             .then(res => {
                 if (res.data.success) {
                     toast.success(res.data.message);
@@ -33,8 +42,8 @@ const Category = () => {
     }
 
     return (
-        <div className="px-5">
-            <h2 className="text-5xl font-semibold text-center my-10">Category </h2>
+        <div className="px-5 space-y-5">
+            <PageIntro pageName={'Category'} />
             <div className="flex justify-between">
                 {/* add category */}
                 <div>
@@ -45,8 +54,10 @@ const Category = () => {
                         <AlertDialogContent>
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Add new job category</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    <Input onChange={(e) => setCategoryName(e.target.value)} placeholder="Enter category name" className="text-lg text-black" />
+                                <AlertDialogDescription className='space-y-3'>
+                                    <Input onChange={(e) => setCategoryName(e.target.value)} placeholder="Enter category name" className="text-black" />
+                                    <Input onChange={(e) => setSlug(e.target.value)} className='text-black' placeholder='Enter category slug'/>
+                                    <Textarea onChange={(e) => setDescription(e.target.value)} className='text-black' placeholder='Enter category description' rows={10}/>
                                 </AlertDialogDescription>
                             </AlertDialogHeader>
                             <AlertDialogFooter>
