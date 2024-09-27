@@ -50,8 +50,6 @@ const Addthumbnail = ({setThumbnailUrl}) => {
                         <div className='h-[150px] w-full rounded bg-slate-300 flex items-center justify-center'> Add Thumbnail
                         </div>
                 }
-
-
                 <Input accept="image/*" type="file" onChange={handleThumbnailUpload} id="thumbnail" className="absolute top-1/2 opacity-0" />
             </label>
 
