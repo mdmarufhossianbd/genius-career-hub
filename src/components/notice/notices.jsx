@@ -31,38 +31,40 @@ const Notices = () => {
     }, [page])
 
     const handlePrevius = () => {
-        setPages( page - 1)
+        setPages(page - 1)
     }
 
     const handleNext = () => {
-        setPages( page + 1)
+        setPages(page + 1)
     }
 
     return (
-        <div className="grid grid-cols-1 gap-2">
+        <div className="grid grid-cols-1 gap-2 mb-10">
             {
                 loading && <div className="flex items-center justify-center mt-32">
-                        <ImSpinner9 className="animate-spin" size={50} />
+                    <ImSpinner9 className="animate-spin" size={50} />
                 </div>
             }
             {
                 notices?.map(item =>
                     <div key={item?._id} className="p-4 rounded border flex items-center justify-between">
-                        <div>
-                            <h2>{item?.title}</h2>                            
+                        <div className="w-[70%] md:w-3/4">
+                            <h2>{item?.title}</h2>
                         </div>
-                        <Link className="px-5 py-2 rounded-md bg-[#1e508c] text-white" href={`/notice/${item?._id}`}>Notice Details</Link>
+                        <div className="w-[30%] md:w-1/4 flex justify-end">
+                            <Link className="lg:px-5 md:px-3 px-2 py-1 rounded-md bg-[#1e508c] text-white" href={`/notice/${item?._id}`}>Notice Details</Link>
+                        </div>
                     </div>
                 )
             }
             {
                 totalNotices > 10 && <div className="my-5 mx-2 flex items-center justify-between gap-5">
-                <p>{page} of {totalPages} Pages</p>
-                <div className="flex items-center gap-3">
-                    <button onClick={handlePrevius} disabled={page === 1} className="flex gap-1 px-5 py-2 bg-[#1e508c] hover:bg-[#184174] text-white duration-500 rounded-md disabled:cursor-not-allowed disabled:bg-[#f6f8fc] disabled:text-black"><IconArrowNarrowLeft stroke={2} />Previous</button>
-                    <button onClick={handleNext} disabled={page === totalPages} className='flex gap-1 px-5 py-2 bg-[#1e508c] hover:bg-[#184174] text-white duration-500 rounded-md disabled:cursor-not-allowed disabled:bg-[#f6f8fc] disabled:text-black'>Next<IconArrowNarrowRight stroke={2} /></button>
+                    <p>{page} of {totalPages} Pages</p>
+                    <div className="flex items-center gap-3">
+                        <button onClick={handlePrevius} disabled={page === 1} className="flex gap-1 px-5 py-2 bg-[#1e508c] hover:bg-[#184174] text-white duration-500 rounded-md disabled:cursor-not-allowed disabled:bg-[#f6f8fc] disabled:text-black"><IconArrowNarrowLeft stroke={2} />Previous</button>
+                        <button onClick={handleNext} disabled={page === totalPages} className='flex gap-1 px-5 py-2 bg-[#1e508c] hover:bg-[#184174] text-white duration-500 rounded-md disabled:cursor-not-allowed disabled:bg-[#f6f8fc] disabled:text-black'>Next<IconArrowNarrowRight stroke={2} /></button>
+                    </div>
                 </div>
-            </div>
             }
         </div>
     );
