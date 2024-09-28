@@ -19,8 +19,7 @@ const CategoryJobs = async () => {
                 </div>
             </div>
             <div className="p-4 bg-gradient-to-t from-[#adadadb6] to-[#2c69b3] hover:from-[#2c69b3] hover:to-[#2c69b3] duration-500 rounded-md">                
-                <h2 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-10 mt-5 text-center text-white"><Link href={'/government-jobs-circular'}>
-                Government Jobs</Link></h2>
+                <h2 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-10 mt-5 text-center text-white">Government Jobs</h2>
                 <div className="grid grid-cols-1 gap-4">
                     {
                         govtJobs?.map(job => <CategoryJobTemplate key={job?._id} job={job} />)
