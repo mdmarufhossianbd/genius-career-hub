@@ -1,5 +1,5 @@
 "use client"
-import { IconBellRingingFilled, IconBriefcaseFilled, IconCategoryFilled, IconHomeFilled, IconSquareRoundedPlusFilled } from '@tabler/icons-react';
+import { IconBellRingingFilled, IconBriefcaseFilled, IconCategoryFilled, IconHomeFilled, IconLayoutDashboardFilled, IconSquareRoundedPlusFilled } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,6 +13,11 @@ const Sidebar = () => {
     }
     const sideberLinks = [
         
+        {
+            name: "Dashboard",
+            href: "/admin",
+            icon: <IconLayoutDashboardFilled />
+        },
         {
             name: "Add Job",
             href: "/admin/add-job",
