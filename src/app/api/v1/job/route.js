@@ -1,13 +1,27 @@
 import { checkAdmin } from "@/config/protectAPI";
-import {
-    connectDB
-} from "@/lib/connectDB";
-import {
-    ObjectId
-} from "mongodb";
-import {
-    NextResponse
-} from "next/server";
+import { connectDB } from "@/lib/connectDB";
+import { ObjectId } from "mongodb";
+import { NextResponse } from "next/server";
+
+export async function GET() {
+    const db = await connectDB();
+    const jobCollection = db.collection('jobs');
+    try {
+        const result = await jobCollection.find().toArray()
+        return NextResponse.json({
+            message : 'All jobs found',
+            status : 200,
+            success : true,
+            result
+        })
+    } catch (error) {
+        return NextResponse.json({
+            message : 'Something went wrong',
+            status : 500,
+            success : false
+        })
+    }
+}
 
 export async function POST(request) {
     const isUnauthorized = await checkAdmin();

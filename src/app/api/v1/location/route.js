@@ -7,8 +7,8 @@ export  async function GET(request) {
     try {
         const {searchParams} = new URL(request.url)        
         const query = searchParams.get('keyword') || ''
-        const page = parseInt(searchParams.get('page') || '1', 9);
-        const limit = parseInt(searchParams.get('limit') || '9', 9)
+        const page = parseInt(searchParams.get('page')) || 1;
+        const limit = parseInt(searchParams.get('limit')) || 10;
         const filter = query ? {location : {$regex: query, $options: 'i'}} : {}
         const skip = (page - 1) * limit;
         const foundJobs = await jobCollection.countDocuments(filter);

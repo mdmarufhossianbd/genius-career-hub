@@ -10,7 +10,7 @@ const JobsTemplate = ({ jobs }) => {
                 {
                     jobs?.map(job =>
                         <Link key={job._id} href={`/jobs/${job?.slug}`}>
-                            <div className='p-4 bg-gradient-to-r from-[#e3ecf9] to-[#fff] border border-[#e3ecf9] hover:from-[#e3ecf9] hover:to-[#e3ecf9] duration-200 rounded flex items-center gap-5' >
+                            <div className='p-4 bg-gradient-to-r from-[#e3ecf9] to-[#fff] border border-[#e3ecf9] hover:from-[#e3ecf9] hover:to-[#e3ecf9] duration-200 rounded flex items-center gap-5 h-full' >
                                 <div className='w-[80%] space-y-2'>
                                     <h2 className='font-medium'>{job?.title}</h2>
                                     <p className='flex gap-2 items-center'>

@@ -1,10 +1,4 @@
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const EditLocation = ({ location, setLocation }) => {
     return (
@@ -13,8 +7,8 @@ const EditLocation = ({ location, setLocation }) => {
                 <SelectValue className="text-white" placeholder="Select Location" />
             </SelectTrigger>
             <SelectContent>
-                <SelectItem value="Barisal">Barisal</SelectItem>
-                <SelectItem value="Chittagong">Chittagong</SelectItem>
+                <SelectItem value="Barishal">Barishal</SelectItem>
+                <SelectItem value="Chattogram">Chattogram</SelectItem>
                 <SelectItem value="Dhaka">Dhaka</SelectItem>
                 <SelectItem value="Khulna">Khulna</SelectItem>
                 <SelectItem value="Mymensingh">Mymensingh</SelectItem>
