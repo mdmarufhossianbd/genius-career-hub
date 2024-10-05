@@ -3,12 +3,26 @@ import { connectDB } from "@/lib/connectDB";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
-export async function GET () {
+export async function GET (request) {
     const db = await connectDB();
     const jobCollection = db.collection('jobs');
     try {
-        const result = await jobCollection.find().toArray()
-        return NextResponse.json({message : "successfully get all jobs", result, status : 200, success : true}) 
+        const {searchParams} = new URL(request.url);        
+        const page = parseInt(searchParams.get('page')) || 1;
+        const limit = parseInt(searchParams.get('limit')) || 10;
+        const skip = (page - 1) * limit
+        const sort = {_id : -1}
+        const result = await jobCollection.find().sort(sort).skip(skip).limit(limit).toArray();
+        const totalJobs = await jobCollection.countDocuments();
+        return NextResponse.json({
+            message : "Successfully get all jobs",
+            result,
+            currentPage : page,
+            totalPages : Math.ceil(totalJobs / limit),
+            totalJobs,
+            status : 200,
+            success : true
+        }) 
     } catch (error) {
         return NextResponse.json({message : "somthing prolem", error : error.message, status : 500, success : false})
     }

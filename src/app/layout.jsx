@@ -1,6 +1,8 @@
+import AdSence from "@/components/shared/adsence";
 import Footer from "@/components/shared/footer";
 import Header from "@/components/shared/header";
 import AuthProvider from "@/service/authProvider";
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -30,6 +32,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <AuthProvider>
+        <head>
+          <AdSence pid={'ca-pub-1838079063396183'} />
+        </head>
         <body className={`${inter.className} flex flex-col justify-between min-h-screen`}>
           <div>
             <Header />
@@ -37,6 +42,7 @@ export default function RootLayout({ children }) {
           </div>
           <Footer />
         </body>
+        <GoogleAnalytics gaId="G-9DNTB5K954" />
       </AuthProvider>
     </html>
   );
